@@ -1,0 +1,12 @@
+---
+import records from '../data/proposals.json';
+const program = records.find(record => record.programId === '27700187');
+const support = program.support;
+const amount = 'US$'+support.amount.toLocaleString('en-US');
+---
+<aside class="program-support" id="chandra-support" aria-labelledby="chandra-support-heading">
+  <h3 id="chandra-support-heading">Chandra · Associated U.S. observing support</h3>
+  <p><strong>Science PI: {program.pi} · {program.time.value} ks awarded</strong> · {program.cycle}, proposal {program.programId}.</p>
+  <p><strong>{amount} approved</strong> in total, including Co-I grants. U.S. administrative PI: <strong>{support.administrativePi}</strong>. This supports the U.S. investigators on the project and is administered on the U.S. side.</p>
+  <p class="program-support-policy"><a href={support.policyUrl}>Chandra funding policy</a> · Non-U.S. science PI and U.S. administrative PI have distinct roles.</p>
+</aside>

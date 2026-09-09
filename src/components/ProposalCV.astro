@@ -1,0 +1,11 @@
+---
+import records from '../data/proposals.json';
+import ProposalYears from './ProposalYears.astro';
+import ProgramSupport from './ProgramSupport.astro';
+---
+<section class="content-section proposals-section" id="proposals" aria-labelledby="proposals-heading">
+  <div class="section-heading"><h2 id="proposals-heading">Observing & research programs</h2></div>
+  <p class="proposal-guide">{records.length} entries, by selection year or cycle start, newest first. Roles refer to my participation. Joint facilities and repeat semesters are listed separately. ALMA Grade C entries are conditional; requested and observed times are explicitly labeled. Awards do not imply completed observations.</p>
+  <ProgramSupport />
+  <ProposalYears />
+</section>

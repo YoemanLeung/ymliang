@@ -1,0 +1,22 @@
+---
+import records from '../data/proposals.json';
+import {proposalsByYear} from '../lib/proposals.mjs';
+import {localUrl} from '../lib/publications.mjs';
+import YearBrowser from './YearBrowser.astro';
+import ProposalYears from './ProposalYears.astro';
+import ProgramSupport from './ProgramSupport.astro';
+const {standalone = false} = Astro.props;
+const groups = proposalsByYear(records);
+const piCount = records.filter(record => record.role === 'PI').length;
+---
+<section class="content-section proposals-section" id="proposals" aria-labelledby="proposals-heading">
+  <div class="section-heading"><span class="eyebrow">04 / PROPOSALS</span><h2 id="proposals-heading">Observing & research programs</h2></div>
+  <div class="publication-intro"><p>Programs I lead and contribute to across the electromagnetic spectrum.</p>{!standalone && <a href={localUrl('proposals/')}>Dedicated reading view <span aria-hidden="true">↗</span></a>}</div>
+  <p class="catalog-note">{records.length} entries · {piCount} as PI · {records.length-piCount} as Co-I or collaborator · {groups.at(-1).year}–{groups[0].year}</p>
+  <p class="proposal-guide">Organized by selection year or cycle start, newest first. Time awards, conditional queues, and analysis programs are labeled separately; an award does not imply completed observations.</p>
+  <YearBrowser id="proposal" prefix="proposal-year-" label="Observing and research programs" singular="entry" plural="entries" years={groups.map(group => group.year)} summary={`${groups.length} years · ${records.length} entries`}>
+    <ProposalYears />
+  </YearBrowser>
+  <p class="talk-note">Joint facilities and repeat semesters have separate entries; the list includes ALMA Grade C programs. Times describe program allocations, with requested or observed time explicitly labeled. Recovered records are current through September 2026.</p>
+  <ProgramSupport />
+</section>

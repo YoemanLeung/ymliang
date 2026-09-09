@@ -15,10 +15,13 @@ try {
   const content=await readFile('src/data/academic.json');
   const data=JSON.parse(content);
   const hash=createHash('sha256').update(content).digest('hex');
+  const proposalsContent=await readFile('src/data/proposals.json');
+  const proposalsHash=createHash('sha256').update(proposalsContent).digest('hex');
+  const proposals=JSON.parse(proposalsContent);
   for(const folder of ['public/files','dist/files']){
     await mkdir(folder,{recursive:true});
     await writeFile(folder+'/yongming-liang-cv.pdf',pdf);
-    await writeFile(folder+'/cv-manifest.json',JSON.stringify({content_sha256:hash,updated:data.updated,papers:data.papers.length},null,2)+'\n');
+    await writeFile(folder+'/cv-manifest.json',JSON.stringify({content_sha256:hash,proposals_sha256:proposalsHash,updated:data.updated,papers:data.papers.length,proposals:proposals.length},null,2)+'\n');
   }
   console.log(`Generated public CV PDF (${Math.round(pdf.length/1024)} KiB) from the same chronological HTML content.`);
 } finally {await browser?.close();await server.close();}

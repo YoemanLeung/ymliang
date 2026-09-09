@@ -183,6 +183,26 @@
   .timeline span {display:block;color:var(--muted)}
   .funding-heading {margin:24px 0 15px}
   .funding-line {font-size:.87rem;color:var(--muted)}
+  .proposal-guide {font-size:.86rem;color:var(--muted);margin:16px 0 24px;max-width:850px}
+  .proposal-list {list-style:none;margin:0;padding:0;min-width:0}
+  .proposal {border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:24px;overflow-wrap:anywhere}
+  .proposal-list li:last-child .proposal {border-bottom:0;margin-bottom:0}
+  .proposal-meta {display:flex;flex-wrap:wrap;align-items:center;gap:7px 14px;font-size:.75rem;color:var(--muted);margin-bottom:12px}
+  .proposal-role {padding:1px 8px;border:1px solid var(--line);border-radius:3px;color:var(--accent)}
+  .proposal-pi {border-color:var(--accent);font-weight:600}
+  .proposal-code {font-variant-numeric:tabular-nums}
+  .proposal-facility {display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:baseline;font-size:1.03rem}
+  .proposal-time {font-size:.86rem;color:var(--accent);white-space:nowrap}
+  .proposal h4 {font-size:1rem;line-height:1.6;margin:10px 0 6px;font-weight:500}
+  .proposal-team,.proposal-note {font-size:.83rem;color:var(--muted);line-height:1.65}
+  .proposal p+p {margin-top:5px}
+  .proposal-source {display:inline-block;margin-top:8px;font-size:.8rem;text-decoration:none}
+  .program-support {margin-top:28px;padding:22px 25px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;background:var(--soft);scroll-margin-top:145px}
+  .program-support h3 {font-size:1rem;margin-bottom:12px}
+  .program-support p {font-size:.86rem;color:var(--muted);line-height:1.7}
+  .program-support p+p {margin-top:8px}
+  .program-support strong {color:var(--ink);font-weight:500}
+  .program-support .program-support-policy {font-size:.78rem}
   .talk-list {list-style:none;margin:0;padding:0;min-width:0}
   .talk-list article {display:grid;grid-template-columns:105px minmax(0,1fr);gap:24px;padding-bottom:25px;margin-bottom:24px;border-bottom:1px solid var(--line)}
   .talk-list li:last-child article {border-bottom:0;margin-bottom:0}
@@ -271,6 +291,8 @@
 @layer responsive {
   @media(max-width:780px) {
     .career-grid {grid-template-columns:1fr;gap:24px}
+    nav {flex-wrap:wrap;justify-content:flex-start;gap:6px 16px}
+    .program-support {padding:18px}
     .publication-year,.space .publication-year {grid-template-columns:1fr;gap:17px}
     .publication-year>h3 {font-size:1.6rem}
     .talk-list article {grid-template-columns:1fr;gap:7px}
@@ -309,13 +331,25 @@
     .cv-document .cv-top img{width:75px}.cv-document .cv-block{margin-top:16px;break-inside:avoid}
     .cv-document .cv-block h2{font-size:15pt;margin-bottom:10px}.cv-document .cv-block li{font-size:10pt;line-height:1.45;margin:7px 0}
     .cv-document .cv-block p{font-size:10pt;line-height:1.5}
-    .cv-document>.publications-section{break-before:page}
+    .cv-document>.publications-section,.cv-document>.proposals-section{break-before:page}
     .cv-document .content-section{padding:20px 0;break-inside:auto}
     .cv-document .section-heading h2{font-size:18pt}.cv-document .eyebrow{font-size:8pt}
     .publication-year{display:block;padding-top:18px;break-inside:auto}
     .publication-year>h3{break-after:avoid;margin:0 0 14px;font-size:13pt}
     .paper{break-inside:avoid;padding-bottom:12px;margin-bottom:12px}
     .paper h4{font-size:10pt}.paper-meta{font-size:8pt}.paper-authors,.paper-venue,.paper-links{font-size:8.5pt}
+    .cv-document .proposal-guide{font-size:9pt;line-height:1.5;margin:12px 0 16px}
+    .cv-document .program-support{break-inside:avoid;margin:16px 0 8px;padding:12px 15px}
+    .cv-document .program-support h3{font-size:10pt;margin-bottom:8px}
+    .cv-document .program-support p{font-size:9pt;line-height:1.45}
+    .cv-document .program-support .program-support-policy{font-size:8pt}
+    .cv-document .proposal{break-inside:avoid;padding-bottom:10px;margin-bottom:10px}
+    .cv-document .proposal-meta{font-size:8pt;gap:5px 12px;margin-bottom:6px}
+    .cv-document .proposal-facility{font-size:10pt;line-height:1.5}
+    .cv-document .proposal-time{font-size:9pt}
+    .cv-document .proposal h4{font-size:9.5pt;line-height:1.4;margin:5px 0}
+    .cv-document .proposal-team,.cv-document .proposal-note,.cv-document .proposal-source{font-size:8.5pt;line-height:1.4}
+    .cv-document .proposal-source{margin-top:4px}
     a{color:#173b56;text-decoration:none}.preprint-label{font-size:7pt}
   }
 }

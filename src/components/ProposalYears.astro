@@ -1,0 +1,20 @@
+---
+import records from '../data/proposals.json';
+import {proposalsByYear, proposalTimeLabel} from '../lib/proposals.mjs';
+const groups = proposalsByYear(records);
+---
+{groups.map(({year, proposals}) => <section class="publication-year" id={'proposal-year-'+year} data-year={year} data-count={proposals.length} aria-labelledby={'proposal-heading-year-'+year}>
+  <h3 id={'proposal-heading-year-'+year}>{year}</h3>
+  <ol class="proposal-list">
+    {proposals.map(proposal => <li data-proposal-id={proposal.id}>
+      <article class="proposal">
+        <div class="proposal-meta"><span class:list={['proposal-role', {'proposal-pi': proposal.role === 'PI'}]}>{proposal.role}</span><span>{proposal.cycle}</span>{proposal.programId && <span class="proposal-code">{proposal.programId}</span>}</div>
+        <div class="proposal-facility"><strong>{proposal.facility}{proposal.instrument && ' / '+proposal.instrument}</strong><span class="proposal-time">{proposalTimeLabel(proposal)}</span></div>
+        <h4>{proposal.title}</h4>
+        <p class="proposal-team">{proposal.role === 'Collaborator' ? 'Program leads' : 'PI'}: {proposal.pi}{proposal.channel && ' · '+proposal.channel}</p>
+        {proposal.note && <p class="proposal-note">{proposal.note}</p>}
+        {proposal.url && <a class="proposal-source" href={proposal.url}>Program details <span aria-hidden="true">↗</span></a>}
+      </article>
+    </li>)}
+  </ol>
+</section>)}

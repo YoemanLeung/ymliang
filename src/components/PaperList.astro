@@ -1,0 +1,12 @@
+---
+const {papers, idPrefix = ''} = Astro.props;
+---
+<ol class="paper-list">
+  {papers.map(paper => <li class="paper" id={idPrefix ? idPrefix + paper.bibcode : undefined} data-bibcode={paper.bibcode} data-date={paper.date}>
+    <div class="paper-meta"><time datetime={paper.date}>{new Date(paper.date+'-01T12:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})} {paper.year}</time>{paper.type==='preprint' && <span class="preprint-label">Preprint</span>}</div>
+    <h4><a href={paper.doi ? 'https://doi.org/'+paper.doi : paper.ads_url}>{paper.title}</a></h4>
+    <p class="paper-authors">{paper.first_author} et al.</p>
+    <p class="paper-venue">{paper.venue}</p>
+    <div class="paper-links"><a href={paper.ads_url}>ADS</a>{paper.doi && <a href={'https://doi.org/'+paper.doi}>DOI</a>}{paper.arxiv && <a href={'https://arxiv.org/abs/'+paper.arxiv}>arXiv</a>}</div>
+  </li>)}
+</ol>

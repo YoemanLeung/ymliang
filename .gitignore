@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env*
+!.env.example
+
+# Local research records and editor state do not belong in this public site.
+private/
+.codex/
+.agents/
+*.log

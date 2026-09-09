@@ -1,0 +1,16 @@
+---
+import {researchTopics} from '../data/research.mjs';
+import {localUrl} from '../lib/publications.mjs';
+---
+<section class="research-section content-section" id="research" aria-labelledby="research-heading">
+  <div class="section-heading"><span class="eyebrow">01 / RESEARCH</span><h2 id="research-heading">A connected Universe</h2></div>
+  <p class="section-intro">From the gas between galaxies to the black holes at their centers, I study how environment shapes the distant Universe.</p>
+  <div class="research-grid">
+    {researchTopics.map(topic => <article>
+      <span class="research-number" aria-hidden="true">{topic.number}</span>
+      <h3><a class="research-title-link" href={localUrl('research/'+topic.slug+'/')}>{topic.title}</a></h3>
+      <p>{topic.summary}</p>
+      <a href={localUrl('research/'+topic.slug+'/')} aria-label={'Read about '+topic.title}>Explore this research <span aria-hidden="true">→</span></a>
+    </article>)}
+  </div>
+</section>

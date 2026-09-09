@@ -1,0 +1,17 @@
+---
+import data from '../data/academic.json';
+import {localUrl} from '../lib/publications.mjs';
+const { compact = false, portrait = {src: data.profile.photo, width: 902, height: 1202} } = Astro.props;
+---
+<aside class:list={['identity', {compact}]}>
+  <img class="portrait" src={localUrl(portrait.src)} alt="Portrait of Yongming Liang" width={portrait.width} height={portrait.height} />
+  <h2>Yongming Liang <span lang="zh">梁永明</span></h2>
+  <p class="position">ICRR Fellow</p>
+  <p>Institute for Cosmic Ray Research<br />The University of Tokyo</p>
+  <a class="email" href={'mailto:' + data.profile.email}>{data.profile.email}</a>
+  <div class="identity-links">
+    <a href={data.profile.links.orcid}>ORCID <span aria-hidden="true">↗</span></a>
+    <a href={data.profile.links.researchmap}>researchmap <span aria-hidden="true">↗</span></a>
+  </div>
+  <p class="location">Kashiwa, Japan</p>
+</aside>

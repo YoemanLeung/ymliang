@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Publications from '../components/Publications.astro';
+import data from '../data/academic.json';
+import { localUrl } from '../lib/publications.mjs';
+---
+<Base mode="document" title="Curriculum vitae | Yongming Liang">
+  <main id="main" class="cv-document">
+    <div class="cv-top">
+      <div><p class="eyebrow">CURRICULUM VITAE · SEPTEMBER 2026</p><h1>Yongming Liang <span lang="zh">梁永明</span></h1><p><strong>ICRR Fellow</strong><br />Institute for Cosmic Ray Research, The University of Tokyo<br /><a href="mailto:ymliang@icrr.u-tokyo.ac.jp">ymliang@icrr.u-tokyo.ac.jp</a> · <a href={data.profile.links.orcid}>ORCID</a> · <a href={data.profile.links.researchmap}>researchmap</a></p></div>
+      <img src={localUrl(data.profile.photo)} alt="Yongming Liang" width="902" height="1202" />
+    </div>
+    <div class="cv-actions"><a class="button primary" href={localUrl('files/yongming-liang-cv.pdf')} download>Download PDF</a></div>
+    <section class="cv-block"><h2>Research interests</h2><p>Galaxy evolution; the galaxy–IGM connection; quasars and supermassive black holes; protoclusters and large-scale structure; high-redshift galaxies and cosmic reionization.</p></section>
+    <section class="cv-block"><h2>Appointments</h2><ul>{data.profile.appointments.map(job=><li><strong>{job.start}–{job.end || 'present'} · {job.role}</strong><br />{job.institution}</li>)}<li><strong>Jan–Feb 2024 · Visiting Researcher</strong><br />University of Milano-Bicocca; host: Sebastiano Cantalupo</li></ul></section>
+    <section class="cv-block"><h2>Education</h2><ul><li><strong>2017–2022 · Ph.D., SOKENDAI</strong><br />Astronomy research based at NAOJ. Thesis: <em>Correlation between galaxy and IGM H I at z ≈ 2 mapped by Subaru/HSC</em>. Supervisors: Nobunari Kashikawa and Masayuki Tanaka.</li><li><strong>2013–2017 · Bachelor's degree in astronomy</strong><br />University of Science and Technology of China. Supervisor: Junxian Wang.</li></ul></section>
+    <section class="cv-block"><h2>Research funding</h2><ul><li><strong>2024–2027 · Principal Investigator · JSPS KAKENHI 24K17084</strong><br />Early-Career Scientists. Elucidating the Trigger and Feedback Mechanisms of the Most Concentrated Quasars at Cosmic Noon. JPY 4,550,000 including indirect costs; JPY 3,500,000 direct.</li><li><strong>2025–2030 · Co-Investigator · JSPS KAKENHI 25H00663</strong><br />Scientific Research (A). Galaxy Overdense Regions in the Distant Universe Revealed by Wide-Area Sky Survey and TAO. PI: Nobunari Kashikawa.</li></ul></section>
+    <section class="cv-block"><h2>Professional service & membership</h2><ul><li>JCMT Time Allocation Committee, September 2023–November 2025.</li><li>International Astronomical Union member, since June 2024.</li><li>Astronomical Society of Japan member, since October 2017.</li></ul></section>
+    <Publications standalone />
+  </main>
+</Base>

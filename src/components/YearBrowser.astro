@@ -1,0 +1,17 @@
+---
+const {id, prefix, label, singular, plural, years, summary} = Astro.props;
+---
+<year-browser class="publication-browser" data-prefix={prefix} data-label={label} data-singular={singular} data-plural={plural}>
+  <div class="publication-controls" data-controls hidden>
+    <button type="button" data-newer aria-controls={id+'-viewport'}><span aria-hidden="true">←</span> Newer</button>
+    <div class="publication-year-select"><label for={id+'-year'}>Year</label><select id={id+'-year'} aria-controls={id+'-viewport'}>{years.map(year => <option value={year}>{year}</option>)}</select></div>
+    <button type="button" data-older aria-controls={id+'-viewport'}>Older <span aria-hidden="true">→</span></button>
+  </div>
+  <div class="publication-scroll" id={id+'-viewport'} role="region" aria-label={label+' by year'} tabindex="0">
+    <slot />
+  </div>
+  <div class="publication-browser-footer"><p data-status role="status" aria-live="polite" aria-atomic="true">{summary}</p><span>Scroll within the list</span></div>
+</year-browser>
+<script>
+  import '../scripts/year-browser.js';
+</script>

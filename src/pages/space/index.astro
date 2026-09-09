@@ -1,0 +1,17 @@
+---
+import {localUrl} from '../../lib/publications.mjs';
+const home = localUrl();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={'0;url='+home} />
+    <title>Yongming Liang</title>
+    <script is:inline define:vars={{home}}>
+      window.location.replace(home + window.location.search + window.location.hash);
+    </script>
+  </head>
+  <body><a href={home}>Continue to Yongming Liang’s homepage</a></body>
+</html>

@@ -1,0 +1,33 @@
+---
+import records from '../data/talks.json';
+import {talksByYear, talkDateLabel, talkTypes} from '../lib/talks.mjs';
+import {localUrl} from '../lib/publications.mjs';
+import YearBrowser from './YearBrowser.astro';
+const {standalone = false} = Astro.props;
+const groups = talksByYear(records);
+---
+<section class="content-section talks-section" id="talks" aria-labelledby="talks-heading">
+  <div class="section-heading"><span class="eyebrow">03 / TALKS</span><h2 id="talks-heading">Talks & posters</h2></div>
+  <div class="publication-intro"><p>Conference talks, seminars, tutorials, and posters, by year.</p>{!standalone && <a href={localUrl('talks/')}>Dedicated reading view <span aria-hidden="true">↗</span></a>}</div>
+  <p class="catalog-note">{records.length} presentations · {groups.at(-1).year}–{groups[0].year} · updated September 2026</p>
+  <YearBrowser id="talk" prefix="talk-year-" label="Talks and posters" singular="presentation" plural="presentations" years={groups.map(group => group.year)} summary={`${groups.length} years · ${records.length} presentations`}>
+    {groups.map(({year, talks}) => <section class="publication-year" id={'talk-year-'+year} data-year={year} data-count={talks.length} aria-labelledby={'talk-heading-year-'+year}>
+      <h3 id={'talk-heading-year-'+year}>{year}</h3>
+      <ol class="talk-list">
+        {talks.map(talk => <li data-talk-id={talk.id}>
+          <article>
+            <div class="talk-date"><time datetime={talk.date}>{talkDateLabel(talk.date)}</time></div>
+            <div class="talk-detail">
+              <div class="talk-meta"><span class="talk-type">{talkTypes[talk.type]}</span>{talk.remote && <span>Presented remotely</span>}</div>
+              <h4>{talk.title || talk.event}</h4>
+              <p>{talk.title && talk.event}{talk.title && talk.location && ' · '}{talk.location}</p>
+              {talk.url && <a href={talk.url}>Event details <span aria-hidden="true">↗</span></a>}
+            </div>
+          </article>
+        </li>)}
+      </ol>
+    </section>)}
+  </YearBrowser>
+  <p class="talk-note">Dates are shown to the precision available; some earlier entries list the event in place of the presentation title.</p>
+  <p class="talk-contact">For seminar invitations or presentation materials, <a href="mailto:ymliang@icrr.u-tokyo.ac.jp">please get in touch</a>.</p>
+</section>

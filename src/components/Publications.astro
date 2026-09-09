@@ -1,0 +1,22 @@
+---
+import data from '../data/academic.json';
+import PaperList from './PaperList.astro';
+import {chronologicalPapers, groupByYear, localUrl} from '../lib/publications.mjs';
+const { standalone = false } = Astro.props;
+const papers = chronologicalPapers(data.papers);
+const groups = groupByYear(papers);
+---
+<section class="content-section publications-section" id="publications" aria-labelledby="publications-heading">
+  <div class="section-heading"><span class="eyebrow">02 / PUBLICATIONS</span><h2 id="publications-heading">Papers & preprints</h2></div>
+  <div class="publication-intro"><p>Newest first, across all author roles. Preprints are marked below.</p>{!standalone && <a href={localUrl('publications/')}>Dedicated reading view <span aria-hidden="true">↗</span></a>}</div>
+  <p class="catalog-note">34 refereed articles · 4 preprints · updated September 2026</p>
+  {Astro.slots.has('default') ? <slot /> : <>
+  <div class="year-jumps" aria-label="Publication years">{groups.map(({year})=><a href={'#year-'+year}>{year}</a>)}</div>
+  {groups.map(({year,papers:yearPapers}) => (
+    <div class="publication-year" id={'year-'+year}>
+      <h3>{year}</h3>
+      <PaperList papers={yearPapers} />
+    </div>
+  ))}
+  </>}
+</section>

@@ -1,0 +1,472 @@
+[
+  {
+    "id": "roman-2026",
+    "date": "2026-07-14",
+    "type": "poster_flash",
+    "event": "Shifting Landscapes in Astrophysics: New Frontiers to Explore with Roman",
+    "location": "Caltech · Pasadena, USA",
+    "title": "From Cold Filaments to Hot Nodes: Protocluster Assembly Pathways at Cosmic Noon with Roman",
+    "url": "https://conference.ipac.caltech.edu/roman2026/page/posters"
+  },
+  {
+    "id": "hsc-mb-2026",
+    "date": "2026-06-30",
+    "type": "talk",
+    "event": "HSC-MB Workshop IV",
+    "location": "Nagoya University, Japan",
+    "title": "Large-scale Structures at Cosmic Noon Mapped by HSC-Niji, Roman, and ULTIMATE-Subaru"
+  },
+  {
+    "id": "guoshoujing-2026",
+    "date": "2026-05-25",
+    "type": "talk",
+    "event": "28th Guoshoujing Symposium on Galaxies and Cosmology",
+    "location": "Haikou, China",
+    "title": "The Cosmic Himalayas: A Record Quasar Concentration at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "aprim-2026",
+    "date": "2026-05-04",
+    "type": "talk",
+    "event": "Asia-Pacific Regional IAU Meeting 2026",
+    "location": "Hong Kong",
+    "title": "The Cosmic Himalayas: A Record Quasar Concentration at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "jwst-2026",
+    "date": "2026-03",
+    "type": "poster_flash",
+    "event": "JWST Tokyo Conference 2026",
+    "location": "Tokyo, Japan",
+    "title": "Cosmic Himalayas: A Record Quasar Concentration at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "dla-2026",
+    "date": "2026-03-19",
+    "type": "talk",
+    "event": "DLA Celebration",
+    "location": null,
+    "title": "Strangulation of Massive Galaxies at Cosmic Noon: A Hint from 3D IGM Tomography"
+  },
+  {
+    "id": "super-irnet-2026",
+    "date": "2026-03-17",
+    "type": "talk",
+    "event": "Final SUPER-IRNET Workshop",
+    "location": "Nakanoshima Center · University of Osaka, Japan",
+    "title": "Cartography at the Cosmic Extremes: Mapping the 100 cMpc-scale Cosmic Himalayas at z=2.2"
+  },
+  {
+    "id": "nju-2026",
+    "date": "2026-01-12",
+    "type": "seminar",
+    "event": "Nanjing University seminar",
+    "location": "Nanjing, China",
+    "title": "The Cosmic Himalayas: The Highest QSO Density Peak at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "aust-2026",
+    "date": "2026-01-09",
+    "type": "seminar",
+    "event": "Anhui University of Science and Technology seminar",
+    "location": "Huainan, China",
+    "title": "The Cosmic Himalayas: An Extreme Quasar Concentration at Cosmic Noon Bridging AGNs, Galaxies, and Cosmic Web",
+    "url": "https://lxy.aust.edu.cn/info/1283/10177.htm"
+  },
+  {
+    "id": "tdli-2026",
+    "date": "2026-01-06",
+    "type": "seminar",
+    "event": "TDLI seminar · Shanghai Jiao Tong University",
+    "location": "Shanghai, China",
+    "title": "The Cosmic Himalayas: An Extreme Quasar Concentration at Cosmic Noon Bridging AGNs, Galaxies, and Cosmic Web",
+    "url": "https://tdli.sjtu.edu.cn/event/4720"
+  },
+  {
+    "id": "baryon-2025",
+    "date": "2025-12-12",
+    "type": "talk",
+    "event": "The Baryon Cycle from Reionization to Cosmic Noon",
+    "location": "Puerto Varas, Chile",
+    "title": "The Cosmic Himalayas: The Highest QSO Density Peak at Cosmic Noon Bridging AGNs, Galaxies, and IGM",
+    "remote": true
+  },
+  {
+    "id": "tsukuba-2025",
+    "date": "2025-11-18",
+    "type": "seminar",
+    "event": "Tsukuba Space Forum",
+    "location": "University of Tsukuba, Japan",
+    "title": "The Cosmic Himalayas: An Extreme Quasar Concentration at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "subaru-2025",
+    "date": "2025-10-30",
+    "type": "talk",
+    "event": "Subaru Users Meeting 2025",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": "The Cosmic Himalayas: The Highest QSO Density Peak at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "gew-2025",
+    "date": "2025-08-28",
+    "type": "talk",
+    "event": "11th Galaxy Evolution Workshop",
+    "location": "Nagoya University, Japan",
+    "title": "Strangulation of Massive Galaxies at Cosmic Noon: A Hint from 3D IGM Tomography"
+  },
+  {
+    "id": "tohoku-2025",
+    "date": "2025-08-20",
+    "type": "talk",
+    "event": "Tohoku Summer Camp 2025",
+    "location": "Appi Kogen · Iwate, Japan",
+    "title": "Galaxy–IGM Interplay at Cosmic Noon: From Fields to Extremes"
+  },
+  {
+    "id": "hsc-agn-2025",
+    "date": "2025-07-30",
+    "type": "invited_talk",
+    "event": "HSC-AGN telecon",
+    "location": "Online",
+    "title": "The Cosmic Himalayas: The Highest QSO Density Peak at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "ecosystem-2025",
+    "date": "2025-07",
+    "type": "flash_talk",
+    "event": "Cosmic Ecosystem",
+    "location": "Perimeter Institute · Waterloo, Canada",
+    "title": "Cosmic Himalayas: A Bridge Between Small and Large Scales at Cosmic Noon"
+  },
+  {
+    "id": "roman-2025",
+    "date": "2025-07-15",
+    "type": "talk",
+    "event": "Cosmic Cartography with Roman",
+    "location": "STScI · Baltimore, USA",
+    "title": "Cosmic Cartography at the Cosmic Extremes: Mapping the 100 Mpc-scale Cosmic Himalayas at Cosmic Noon with Roman"
+  },
+  {
+    "id": "naoj-advisory-2025",
+    "date": "2025-06",
+    "type": "invited_talk",
+    "event": "NAOJ Advisory Committee for Research and Management",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": "Cosmic Himalayas: The Highest QSO Density Peak at Cosmic Noon Bridging AGNs, Galaxies, and IGM"
+  },
+  {
+    "id": "dancing-2025",
+    "date": "2025-06",
+    "type": "flash_talk",
+    "event": "Dancing in the Dark: When Galaxies Shape Galaxies",
+    "location": "Sexten, Italy",
+    "title": "Cosmic Himalayas: The Most Overdense Quasars and Their Origins Revealed by Galaxy Mergers"
+  },
+  {
+    "id": "massive-galaxies-2025",
+    "date": "2025-06",
+    "type": "poster",
+    "event": "IAU Symposium: Massive Galaxies across the Universe",
+    "location": "Naples, Italy",
+    "title": "Cosmic Himalayas: Hints of Massive Galaxy Formation in the Most Overdense Quasars at z≈2"
+  },
+  {
+    "id": "agora-2025",
+    "date": "2025-05-26",
+    "type": "talk",
+    "event": "Galaxy Formation + AGORA in Asia 2025",
+    "location": "University of Osaka, Japan",
+    "title": "Cosmic Himalayas: A Bridge between Small and Large Scales at Cosmic Noon"
+  },
+  {
+    "id": "prima-2025",
+    "date": "2025-05-20",
+    "type": "talk",
+    "event": "PRIMA and the Future of Far-Infrared Science",
+    "location": "Caltech · Pasadena, USA",
+    "title": "Cosmic Himalayas: The Highest QSO Density Peak as a Testbed for Dust, Star Formation, and AGN Feedback at Cosmic Noon",
+    "remote": true
+  },
+  {
+    "id": "spr-ilr-2025",
+    "date": "2025-03",
+    "type": "talk",
+    "event": "SPR + ILR joint workshop",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": null
+  },
+  {
+    "id": "pfs-tutorial-2025",
+    "date": "2025-03-04",
+    "type": "tutorial",
+    "event": "PFS AGN Town Meeting 2025",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": "PFS Pipeline Tutorial"
+  },
+  {
+    "id": "subaru-2024",
+    "date": "2025-01",
+    "type": "poster_flash",
+    "event": "Subaru Users Meeting 2024",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": "Preview of the Information Site for Subaru PFS Data Reduction Pipeline (DRP)"
+  },
+  {
+    "id": "dust-gas-2024",
+    "date": "2024-12",
+    "type": "poster_flash",
+    "event": "Evolution of Dust and Gas throughout Cosmic Time",
+    "location": "Hiroshima, Japan",
+    "title": "Cosmic Himalayas: The Highest Quasar Density Peak at Cosmic Noon in a 10,000 deg² Sky"
+  },
+  {
+    "id": "hsc-mb-2024",
+    "date": "2024-11-27",
+    "type": "talk",
+    "event": "2nd HSC Medium Band Workshop",
+    "location": "Nagoya University, Japan",
+    "title": "Galaxy–IGM Correlation at and beyond Cosmic Noon with HSC-MB"
+  },
+  {
+    "id": "ustc-2024",
+    "date": "2024-10",
+    "type": "seminar",
+    "event": "USTC seminar",
+    "location": "Nagano, Japan",
+    "title": null
+  },
+  {
+    "id": "ilr-2024",
+    "date": "2024-09-26",
+    "type": "talk",
+    "event": "International Leading Research (ILR) Workshop",
+    "location": "Osaka University, Japan",
+    "title": "The Highest Quasar Density Peak at Cosmic Noon in a 10,000 deg² Sky"
+  },
+  {
+    "id": "galaxy-igm-2024",
+    "date": "2024-08-19",
+    "type": "talk",
+    "event": "Galaxy–IGM Workshop 2024",
+    "location": "Hirosaki University, Japan",
+    "title": "Cosmic Himalayas: The Highest Quasar Density Peak at Cosmic Noon in a 10,000 deg² Sky"
+  },
+  {
+    "id": "gew-2024",
+    "date": "2024-08-06",
+    "type": "talk",
+    "event": "10th Galaxy Evolution Workshop",
+    "location": "ASIAA · Taipei",
+    "title": "Cosmic Himalayas: The Most Concentrated Quasars at Cosmic Noon",
+    "url": "https://events.asiaa.sinica.edu.tw/workshop/20240806/"
+  },
+  {
+    "id": "super-irnet-2024",
+    "date": "2024-07-23",
+    "type": "talk",
+    "event": "2nd SUPER-IRNET Workshop",
+    "location": "Beppu, Japan",
+    "title": "Cosmic Himalayas: A Possible Synergy with SUPER-IRNET for Understanding the Densest Quasars at Cosmic Noon"
+  },
+  {
+    "id": "asj-spring-2024",
+    "date": "2024-03",
+    "type": "talk",
+    "event": "ASJ Spring Annual Meeting",
+    "location": "The University of Tokyo · Hongo, Japan",
+    "title": "The Most Concentrated Quasars Revealed by Subaru HSC and PFS at z≈2"
+  },
+  {
+    "id": "pfs-satellite-2024",
+    "date": "2024-03-09",
+    "type": "talk",
+    "event": "PFS Satellite Workshop",
+    "location": null,
+    "title": "The Most Concentrated Quasars Revealed by Subaru HSC and PFS at z≈2"
+  },
+  {
+    "id": "gopira-2023",
+    "date": "2023-09",
+    "type": "talk",
+    "event": "GOPIRA Symposium 2023",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": null
+  },
+  {
+    "id": "ustc-2023",
+    "date": "2023-09",
+    "type": "seminar",
+    "event": "USTC seminar",
+    "location": "Yamanakako, Japan",
+    "title": "The Observational Instruments for Extragalactic Astronomy in Japan (and more…)"
+  },
+  {
+    "id": "hsc-mb-2023",
+    "date": "2023-09-01",
+    "type": "talk",
+    "event": "HSC Medium Band Workshop",
+    "location": "Nagoya University, Japan",
+    "title": "Galaxy–IGM Correlation at and beyond Cosmic Noon & Application of HSC-MB"
+  },
+  {
+    "id": "galaxy-igm-2023",
+    "date": "2023-08-02",
+    "type": "talk",
+    "event": "Galaxy–IGM Workshop 2023",
+    "location": "Act City · Hamamatsu, Japan",
+    "title": "The Most Extremely Concentrated Quasars at Cosmic Noon: Initial Insights from 3D IGM Tomography"
+  },
+  {
+    "id": "guoshoujing-2023",
+    "date": "2023-05-21",
+    "type": "talk",
+    "event": "25th CAS Guoshoujing Symposium on Galaxies and Cosmology",
+    "location": "Huangshan, China",
+    "title": "Correlation between LAEs and IGM H I at z≈2 Mapped by Subaru/HSC"
+  },
+  {
+    "id": "pfs-ge-2023",
+    "date": "2023-03-01",
+    "type": "talk",
+    "event": "PFS Galaxy Evolution Working Group Meeting",
+    "location": "Kashiwa, Japan",
+    "title": "MAMMOTH-Subaru at Cosmic Noon: LAEs and LABs in Dense IGM Regions"
+  },
+  {
+    "id": "gew-2023",
+    "date": "2023-02-22",
+    "type": "talk",
+    "event": "9th Galaxy Evolution Workshop",
+    "location": "Kyoto University, Japan",
+    "title": "MAMMOTH-Subaru Survey Detecting LAEs and LABs Traced by IGM/AGN at Cosmic Noon"
+  },
+  {
+    "id": "subaru-2022",
+    "date": "2023-02-02",
+    "type": "talk",
+    "event": "Subaru Users Meeting 2022",
+    "location": "NAOJ · Mitaka, Japan",
+    "title": "Variation in LAE–IGM H I Correlation at z≈2 Mapped by Subaru/HSC"
+  },
+  {
+    "id": "japan-france-2022",
+    "date": "2022-11-16",
+    "type": "talk",
+    "event": "Japan–France Galaxy Formation Workshop",
+    "location": "The University of Tokyo · Hongo, Japan",
+    "title": "Variation in LAE–IGM H I Correlation at z≈2 Mapped by Subaru/HSC"
+  },
+  {
+    "id": "asj-autumn-2022",
+    "date": "2022-09-14",
+    "type": "talk",
+    "event": "ASJ Autumn Annual Meeting",
+    "location": "Niigata University, Japan",
+    "title": "Field Variation in LAE–IGM H I Correlation at z≈2 Mapped by Subaru/HSC"
+  },
+  {
+    "id": "galaxy-igm-2022",
+    "date": "2022-08-09",
+    "type": "talk",
+    "event": "Galaxy–IGM Workshop 2022",
+    "location": "Kushiro, Japan",
+    "title": "Variation in LAE–IGM H I Correlation at z≈2 Mapped by Subaru/HSC"
+  },
+  {
+    "id": "cartography-2022",
+    "date": "2022-03",
+    "type": "talk",
+    "event": "Cosmic Cartography 2022: Exploring the Cosmic Web and Large Scale Structure",
+    "location": "Online · hosted by Kavli IPMU",
+    "title": "Field Variation in LAE–IGM H I Correlation at Cosmic Noon Mapped by Subaru/HSC"
+  },
+  {
+    "id": "gew-2022",
+    "date": "2022-02",
+    "type": "talk",
+    "event": "8th Galaxy Evolution Workshop",
+    "location": "Online",
+    "title": "Field Variation in LAE–IGM H I Correlation at Cosmic Noon Mapped by Subaru/HSC"
+  },
+  {
+    "id": "galaxy-igm-2021",
+    "date": "2021-08",
+    "type": "talk",
+    "event": "Galaxy–IGM Workshop 2021",
+    "location": "Online · hosted by the University of Tsukuba",
+    "title": null
+  },
+  {
+    "id": "galaxy-igm-2020",
+    "date": "2020-08-05",
+    "type": "talk",
+    "event": "Galaxy–IGM Workshop 2020",
+    "location": "Online",
+    "title": "Correlation between LAE and IGM H I Distributions at z≈2 Based on Subaru/HSC"
+  },
+  {
+    "id": "subaru-20th-2019",
+    "date": "2019-11",
+    "type": "poster_flash",
+    "event": "Subaru Telescope 20th Anniversary",
+    "location": "Waikoloa · Hawaii, USA",
+    "title": "Correlation between Galaxies and IGM at z=2.2 Based on Subaru/HSC MAMMOTH Overdensities & SDSS/eBOSS Quasar Spectra"
+  },
+  {
+    "id": "quasars-2019",
+    "date": "2019-10",
+    "type": "poster_flash",
+    "event": "Cosmic Evolution of Quasars: From First Light to Local Relics",
+    "location": "KIAA · Peking University · Beijing, China",
+    "title": "Correlation between Galaxies and IGM at z=2.2 Based on SDSS/eBOSS Quasar Spectra & Subaru/HSC MAMMOTH Overdensities"
+  },
+  {
+    "id": "asj-autumn-2019",
+    "date": "2019-09-12",
+    "type": "talk",
+    "event": "ASJ Autumn Annual Meeting",
+    "location": "Kumamoto University, Japan",
+    "title": "Correlation between Galaxy and IGM H I at z≈2.2 Based on Subaru/HSC MAMMOTH Overdensities & SDSS/eBOSS Quasar Spectra"
+  },
+  {
+    "id": "gew-2019",
+    "date": "2019-06-07",
+    "type": "talk",
+    "event": "6th Galaxy Evolution Workshop",
+    "location": "Kavli IPMU · Kashiwa, Japan",
+    "title": "Correlation between Galaxy and IGM at z=2.2 Based on MAMMOTH Overdensities Mapped by HSC"
+  },
+  {
+    "id": "asj-spring-2019",
+    "date": "2019-03",
+    "type": "talk",
+    "event": "ASJ Spring Annual Meeting",
+    "location": "Hosei University · Tokyo, Japan",
+    "title": "Search for Massive LAE Overdensities Traced by IGM to Study Their Correlation at z≈2.2"
+  },
+  {
+    "id": "igm-2018",
+    "date": "2018-09",
+    "type": "talk",
+    "event": "IGM 2018: Revealing Cosmology and Reionization History with the Intergalactic Medium",
+    "location": "Kavli IPMU · Kashiwa, Japan",
+    "title": "Search for Massive LAE Overdensities Traced by IGM to Study Their Correlation at z≈2.2"
+  },
+  {
+    "id": "wakate-2018",
+    "date": "2018-07",
+    "type": "poster_flash",
+    "event": "48th Summer School on Astronomy and Astrophysics",
+    "location": "Toyohashi, Japan",
+    "title": "Search for the Most Massive Overdensities at z≈2.2 with Subaru HSC"
+  },
+  {
+    "id": "gew-2018",
+    "date": "2018-06",
+    "type": "poster_flash",
+    "event": "5th Galaxy Evolution Workshop",
+    "location": "Ehime University · Matsuyama, Japan",
+    "title": "Search for the Most Massive Overdensities at z≈2.2 with Subaru HSC"
+  }
+]

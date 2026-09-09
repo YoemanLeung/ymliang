@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import PaperList from '../../components/PaperList.astro';
+import data from '../../data/academic.json';
+import {researchTopics} from '../../data/research.mjs';
+import {topicReferences, shortCitation} from '../../lib/research.mjs';
+import {localUrl} from '../../lib/publications.mjs';
+
+export function getStaticPaths() {
+  return researchTopics.map(topic => ({params: {slug: topic.slug}, props: {topic}}));
+}
+const {topic} = Astro.props;
+const references = topicReferences(topic, data.papers);
+const byId = new Map(references.map(paper => [paper.bibcode, paper]));
+---
+<Base mode="space" title={topic.title+' | Yongming Liang'} description={topic.summary}>
+  <main id="main" class="research-page">
+    <a class="research-back" href={localUrl('#research')}>← All research interests</a>
+    <header class="research-page-header">
+      <p class="eyebrow">RESEARCH / {topic.number}</p>
+      <h1>{topic.title}</h1>
+      <p class="research-subtitle">{topic.subtitle}</p>
+    </header>
+    <div class="research-story">
+      <aside class="research-question"><p class="eyebrow">THE QUESTION</p><p>{topic.question}</p><a href="#references">References ↓</a></aside>
+      <div class="research-prose">
+        <p class="research-lead">{topic.introduction}</p>
+        {topic.sections.map(section => <section>
+          <h2>{section.heading}</h2>
+          <p>{section.text}</p>
+          <p class="research-citations">{section.citations.map(id => <a href={'#reference-'+id}>{shortCitation(byId.get(id))}</a>)}</p>
+        </section>)}
+      </div>
+    </div>
+    <section class="research-references" id="references" aria-labelledby="references-title">
+      <div class="section-heading"><span class="eyebrow">FURTHER READING</span><h2 id="references-title">References</h2></div>
+      <PaperList papers={references} idPrefix="reference-" />
+      <a class="button" href={localUrl('publications/')}>All publications →</a>
+    </section>
+    <div class="related-research"><p class="eyebrow">EXPLORE MORE</p>{researchTopics.filter(item => item.slug !== topic.slug).map(item => <a href={localUrl('research/'+item.slug+'/')}>{item.title} <span aria-hidden="true">→</span></a>)}</div>
+  </main>
+</Base>

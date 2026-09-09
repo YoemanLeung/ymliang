@@ -1,0 +1,18 @@
+---
+import data from '../data/academic.json';
+import {chronologicalPapers, groupByYear} from '../lib/publications.mjs';
+import PaperList from './PaperList.astro';
+import Publications from './Publications.astro';
+import YearBrowser from './YearBrowser.astro';
+const {standalone = false} = Astro.props;
+const papers = chronologicalPapers(data.papers);
+const groups = groupByYear(papers);
+---
+<Publications standalone={standalone}>
+  <YearBrowser id="publication" prefix="year-" label="Publications" singular="paper" plural="papers" years={groups.map(group => group.year)} summary={`${groups.length} years · ${papers.length} papers & preprints`}>
+      {groups.map(({year, papers}) => <section class="publication-year" id={'year-'+year} data-year={year} data-count={papers.length} aria-labelledby={'heading-year-'+year}>
+        <h3 id={'heading-year-'+year}>{year}</h3>
+        <PaperList papers={papers} />
+      </section>)}
+  </YearBrowser>
+</Publications>

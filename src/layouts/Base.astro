@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+import { localUrl } from '../lib/publications.mjs';
+const { title = 'Yongming Liang | Extragalactic astronomy', mode = 'space', description = 'Yongming Liang, ICRR Fellow at The University of Tokyo. Galaxies, black holes, and intergalactic gas in the cosmic web.' } = Astro.props;
+const sections = [['research','Research'],['publications','Publications'],['talks','Talks'],['cv','CV'],['news','News']];
+const home = localUrl();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={mode === 'space' ? '#04050a' : '#163858'} />
+    <title>{title}</title>
+    {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
+    <link rel="icon" type="image/svg+xml" href={localUrl('favicon.svg')} />
+  </head>
+  <body class={mode}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href={home}><span class="brand-mark" aria-hidden="true">✦</span> Yongming Liang</a>
+        <nav aria-label="Main navigation">
+          {sections.map(([id,label]) => <a href={home + '#' + id}>{label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <div><strong>Yongming Liang <span lang="zh">梁永明</span></strong><br />ICRR · The University of Tokyo</div>
+      <div><a href="mailto:ymliang@icrr.u-tokyo.ac.jp">Get in touch</a><br /><span>Updated September 2026</span></div>
+    </footer>
+  </body>
+</html>

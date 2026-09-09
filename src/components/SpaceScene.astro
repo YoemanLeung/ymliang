@@ -1,0 +1,12 @@
+<div class="cosmic-stage" data-cosmic-stage data-state="loading">
+  <canvas id="cosmic-canvas" tabindex="0" aria-label="Illustrative 3D cosmic web. Drag to orbit, or use left and right arrow keys when focused. Home resets the view."></canvas>
+  <div class="scene-controls" aria-label="Cosmic scene controls">
+    <button id="motion-toggle" type="button" aria-pressed="false" disabled>Pause motion</button>
+    <button id="scene-reset" type="button" disabled>Reset view</button>
+  </div>
+  <div class="scene-caption"><span class="scene-key"><i class="gas-key"></i> Gas <i class="galaxy-key"></i> Galaxies <i class="quasar-key"></i> Quasars</span><span id="scene-status" role="status">Illustrative cosmic web</span></div>
+</div>
+<script>
+  import { mountCosmicScene } from '../scripts/cosmic-scene.js';
+  mountCosmicScene();
+</script>

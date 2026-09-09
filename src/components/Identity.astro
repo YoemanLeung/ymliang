@@ -1,7 +1,7 @@
 ---
 import data from '../data/academic.json';
 import {localUrl} from '../lib/publications.mjs';
-const { compact = false, portrait = {src: data.profile.photo, width: 902, height: 1202} } = Astro.props;
+const { compact = false, portrait = {src: data.profile.photo, width: 1199, height: 1199} } = Astro.props;
 ---
 <aside class:list={['identity', {compact}]}>
   <img class="portrait" src={localUrl(portrait.src)} alt="Portrait of Yongming Liang" width={portrait.width} height={portrait.height} />

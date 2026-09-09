@@ -68,6 +68,6 @@ The root is the selected 3D homepage; old `/space/` links redirect there. The wo
 
 ## Assets and release scope
 
-The 3D page uses the Alps selfie explicitly supplied by the user; the CV retains the formal portrait. Public copies have personal EXIF metadata removed, with identical decoded pixels and preserved color profiles. Original files remain unchanged. No private slide decks, job-application CV PDFs, science catalogs, or proposal results are included. Talks link to public event information where verified; slide downloads can be added after selecting the exact public versions.
+The 3D page uses the Alps selfie explicitly supplied by the user; the CV uses the user-selected blue-background suit portrait (`yongming-liang-suit.jpg`). Public copies have personal metadata removed, with identical decoded pixels and preserved color profiles where present. Original files remain unchanged. No private slide decks, job-application CV PDFs, science catalogs, or proposal results are included. Talks link to public event information where verified; slide downloads can be added after selecting the exact public versions.
 
 See `ASSETS.md` for asset provenance.

@@ -1,0 +1,10 @@
+---
+import data from '../data/academic.json';
+const journals = new Intl.ListFormat('en', {style: 'long', type: 'conjunction'}).format(data.profile.peer_review_journals);
+---
+<ul class="service-list">
+  <li>Journal referee: {journals}.</li>
+  <li>JCMT Time Allocation Committee, September 2023–November 2025.</li>
+  <li>International Astronomical Union member, since June 2024.</li>
+  <li>Astronomical Society of Japan member, since October 2017.</li>
+</ul>

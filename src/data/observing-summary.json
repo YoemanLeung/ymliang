@@ -6,52 +6,6 @@
   },
   "facilities": [
     {
-      "id": "alma",
-      "facility": "ALMA",
-      "pi": {
-        "measurements": [
-          {
-            "value": 30.3,
-            "unit": "hours",
-            "basis": "requested"
-          }
-        ],
-        "unquantified": true,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [
-          {
-            "value": 30.7,
-            "unit": "hours",
-            "basis": "requested"
-          }
-        ],
-        "unquantified": true,
-        "analysis": false
-      }
-    },
-    {
-      "id": "blanco-4-m",
-      "facility": "Blanco 4-m",
-      "pi": {
-        "measurements": [
-          {
-            "value": 7,
-            "unit": "nights",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
       "id": "chandra",
       "facility": "Chandra",
       "pi": {
@@ -62,8 +16,8 @@
             "basis": "allocated"
           }
         ],
-        "unquantified": false,
-        "analysis": false
+        "unquantified": 0,
+        "analysis": 0
       },
       "collaboration": {
         "measurements": [
@@ -73,182 +27,8 @@
             "basis": "allocated"
           }
         ],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "gemini-north",
-      "facility": "Gemini North",
-      "pi": {
-        "measurements": [],
-        "unquantified": true,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "hubble",
-      "facility": "Hubble",
-      "pi": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [
-          {
-            "value": 2,
-            "unit": "orbits",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "jcmt",
-      "facility": "JCMT",
-      "pi": {
-        "measurements": [
-          {
-            "value": 60.7,
-            "unit": "hours",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "jwst",
-      "facility": "JWST",
-      "pi": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [
-          {
-            "value": 161.3,
-            "unit": "hours",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "keck",
-      "facility": "Keck",
-      "pi": {
-        "measurements": [
-          {
-            "value": 0.5,
-            "unit": "nights",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [
-          {
-            "value": 8,
-            "unit": "nights",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "magellan",
-      "facility": "Magellan",
-      "pi": {
-        "measurements": [
-          {
-            "value": 1,
-            "unit": "nights",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [
-          {
-            "value": 2,
-            "unit": "nights",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "meerkat",
-      "facility": "MeerKAT",
-      "pi": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [
-          {
-            "value": 20,
-            "unit": "hours",
-            "basis": "allocated"
-          }
-        ],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "noema",
-      "facility": "NOEMA",
-      "pi": {
-        "measurements": [],
-        "unquantified": true,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      }
-    },
-    {
-      "id": "roman",
-      "facility": "Roman",
-      "pi": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
-      },
-      "collaboration": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": true
+        "unquantified": 0,
+        "analysis": 0
       }
     },
     {
@@ -262,8 +42,8 @@
             "basis": "allocated"
           }
         ],
-        "unquantified": false,
-        "analysis": false
+        "unquantified": 0,
+        "analysis": 0
       },
       "collaboration": {
         "measurements": [
@@ -273,28 +53,214 @@
             "basis": "allocated"
           }
         ],
-        "unquantified": false,
-        "analysis": false
+        "unquantified": 0,
+        "analysis": 0
       }
     },
     {
-      "id": "ugmrt",
-      "facility": "uGMRT",
+      "id": "keck",
+      "facility": "Keck",
       "pi": {
-        "measurements": [],
-        "unquantified": false,
-        "analysis": false
+        "measurements": [
+          {
+            "value": 0.5,
+            "unit": "nights",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
       },
       "collaboration": {
         "measurements": [
           {
-            "value": 39,
-            "unit": "hours",
-            "basis": "observed"
+            "value": 8,
+            "unit": "nights",
+            "basis": "allocated"
           }
         ],
-        "unquantified": false,
-        "analysis": false
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "magellan",
+      "facility": "Magellan",
+      "pi": {
+        "measurements": [
+          {
+            "value": 1,
+            "unit": "nights",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [
+          {
+            "value": 2,
+            "unit": "nights",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "gemini-north",
+      "facility": "Gemini North",
+      "pi": {
+        "measurements": [],
+        "unquantified": 1,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "blanco-4-m",
+      "facility": "Blanco 4-m",
+      "pi": {
+        "measurements": [
+          {
+            "value": 7,
+            "unit": "nights",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "hubble",
+      "facility": "Hubble",
+      "pi": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [
+          {
+            "value": 2,
+            "unit": "orbits",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "jwst",
+      "facility": "JWST",
+      "pi": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [
+          {
+            "value": 161.3,
+            "unit": "hours",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "roman",
+      "facility": "Roman",
+      "pi": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 1
+      }
+    },
+    {
+      "id": "jcmt",
+      "facility": "JCMT",
+      "pi": {
+        "measurements": [
+          {
+            "value": 60.7,
+            "unit": "hours",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "alma",
+      "facility": "ALMA",
+      "pi": {
+        "measurements": [
+          {
+            "value": 30.3,
+            "unit": "hours",
+            "basis": "requested"
+          }
+        ],
+        "unquantified": 1,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [
+          {
+            "value": 30.7,
+            "unit": "hours",
+            "basis": "requested"
+          }
+        ],
+        "unquantified": 1,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "noema",
+      "facility": "NOEMA",
+      "pi": {
+        "measurements": [
+          {
+            "value": 10,
+            "unit": "hours",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
       }
     },
     {
@@ -302,8 +268,8 @@
       "facility": "VLA",
       "pi": {
         "measurements": [],
-        "unquantified": false,
-        "analysis": false
+        "unquantified": 0,
+        "analysis": 0
       },
       "collaboration": {
         "measurements": [
@@ -313,18 +279,59 @@
             "basis": "allocated"
           }
         ],
-        "unquantified": false,
-        "analysis": false
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "meerkat",
+      "facility": "MeerKAT",
+      "pi": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [
+          {
+            "value": 20,
+            "unit": "hours",
+            "basis": "allocated"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
+      }
+    },
+    {
+      "id": "ugmrt",
+      "facility": "uGMRT",
+      "pi": {
+        "measurements": [],
+        "unquantified": 0,
+        "analysis": 0
+      },
+      "collaboration": {
+        "measurements": [
+          {
+            "value": 39,
+            "unit": "hours",
+            "basis": "observed"
+          }
+        ],
+        "unquantified": 0,
+        "analysis": 0
       }
     }
   ],
   "support": {
     "facility": "Chandra",
+    "cycle": "Cycle 27",
     "amount": 61320,
     "currency": "USD",
     "status": "approved",
     "administrativePi": "Martin Elvis",
-    "scope": "Total U.S. observing grant, including Co-I grants",
-    "policyUrl": "https://cxc.harvard.edu/proposer/CfP/arc_pdfs/CfP_cyc27.pdf"
+    "administrativePiAffiliation": "Center for Astrophysics | Harvard & Smithsonian",
+    "scope": "Total U.S. observing grant, including Co-I grants"
   }
 }

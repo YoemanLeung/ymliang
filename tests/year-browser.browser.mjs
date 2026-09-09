@@ -36,6 +36,12 @@ try {
   assert.equal(await page.locator('[data-proposal-id]').count(),0);
   assert.equal(await page.locator('#cv #chandra-support').count(),1);
   assert.equal(await proposals.locator('#chandra-support').count(),0);
+  assert.match(await page.locator('#chandra-support').innerText(),/Chandra Cycle 27/);
+  assert.match(await page.locator('#cv .service-list').innerText(),/Journal referee:.*Nature Astronomy/);
+  assert.match(await proposals.locator('[data-facility="chandra"]').innerText(),/340 ks\s+120 ks/);
+  assert.match(await proposals.locator('[data-facility="roman"]').innerText(),/1 Analysis program/);
+  assert.match(await proposals.locator('[data-facility="noema"]').innerText(),/10 h/);
+  assert.doesNotMatch(await proposals.innerText(),/Unquantified|unquantified|Observed/);
   if(process.env.QA_OUTPUT_DIR){
     await mkdir(process.env.QA_OUTPUT_DIR,{recursive:true});
     await proposals.screenshot({path:join(process.env.QA_OUTPUT_DIR,'summary-desktop.png')});
@@ -100,6 +106,7 @@ try {
   assert.equal(await page.locator('[data-proposal-id]').count(),0);
   assert.equal(await page.locator('[data-facility]').count(),summary.facilities.length);
   assert.equal(await page.locator('.cv-block #chandra-support').count(),1);
+  assert.match(await page.locator('.service-list').innerText(),/Journal referee:.*Nature Astronomy/);
   const portrait=page.locator('.cv-top img');
   assert.ok((await portrait.getAttribute('src')).endsWith('yongming-liang-suit.jpg'));
   await page.emulateMedia({media:'print'});

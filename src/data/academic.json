@@ -78,7 +78,12 @@
         "url": "https://kaken.nii.ac.jp/en/grant/KAKENHI-PROJECT-25H00663/"
       }
     ],
-    "photo": "images/yongming-liang-suit.jpg"
+    "photo": "images/yongming-liang-suit.jpg",
+    "peer_review_journals": [
+      "Astronomy & Astrophysics (A&A)",
+      "The Astrophysical Journal (ApJ)",
+      "Nature Astronomy"
+    ]
   },
   "papers": [
     {

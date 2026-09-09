@@ -184,6 +184,7 @@
   .timeline span {display:block;color:var(--muted)}
   .funding-heading {margin:24px 0 15px}
   .funding-line {font-size:.87rem;color:var(--muted)}
+  .service-list {font-size:.87rem;color:var(--muted);padding-left:20px;line-height:1.7}
   .proposal-guide {font-size:.86rem;color:var(--muted);margin:16px 0 24px;max-width:850px}
   .observing-table-wrap {border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--soft)}
   .observing-table {width:100%;border-collapse:collapse;table-layout:fixed;font-size:.9rem;text-align:left;line-height:1.5}
@@ -193,7 +194,7 @@
   .observing-table tr:last-child th,.observing-table tr:last-child td {border-bottom:0}
   .observing-value {display:block;font-variant-numeric:tabular-nums}
   .observing-value strong {font-weight:500;color:var(--accent)}
-  .observing-value small,.observing-unquantified {display:block;font-size:.73rem;color:var(--muted)}
+  .observing-value small {display:block;font-size:.73rem;color:var(--muted)}
   .observing-empty {color:var(--muted)}
   .observing-notes,.program-support {margin-top:16px;font-size:.78rem;color:var(--muted);line-height:1.7}
   .program-support {scroll-margin-top:145px;font-size:.87rem}
@@ -290,7 +291,7 @@
     .observing-table {font-size:.83rem}
     .observing-table th,.observing-table td {padding:10px 9px}
     .observing-table thead th {font-size:.69rem;letter-spacing:0}
-    .observing-value small,.observing-unquantified {font-size:.68rem}
+    .observing-value small {font-size:.68rem}
     .cv-document .cv-top {flex-wrap:wrap}
     .publication-year,.space .publication-year {grid-template-columns:1fr;gap:17px}
     .publication-year>h3 {font-size:1.6rem}
@@ -343,7 +344,7 @@
     .cv-document .observing-table th,.cv-document .observing-table td{padding:7px 12px}
     .cv-document .observing-table tr{break-inside:avoid}
     .cv-document .observing-table thead th{font-size:8pt}
-    .cv-document .observing-value small,.cv-document .observing-unquantified{font-size:7.5pt}
+    .cv-document .observing-value small{font-size:7.5pt}
     .cv-document .observing-notes,.cv-document .program-support{font-size:8pt;line-height:1.5;margin-top:12px;break-inside:avoid}
     .cv-document .cv-block .program-support{font-size:10pt;line-height:1.45;margin:0}
     a{color:#173b56;text-decoration:none}.preprint-label{font-size:7pt}

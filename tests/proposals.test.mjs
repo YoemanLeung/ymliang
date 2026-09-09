@@ -19,14 +19,24 @@ test('Telescope totals separate roles, units, and requested/observed time', () =
 });
 
 test('Unknown allocations and analysis programs never become zero or invented hours', () => {
-  const summary = summarizeProposals([record('a',null),record('b',null,{role:'Co-I',kind:'analysis'})],'2026-09-10');
+  const summary = summarizeProposals([record('a',null),record('b',null,{role:'Co-I',kind:'analysis'}),record('c',null,{role:'Co-I',kind:'analysis'})],'2026-09-10');
   const row = summary.facilities[0];
-  assert.deepEqual(row.pi,{measurements:[],unquantified:true,analysis:false});
-  assert.deepEqual(row.collaboration,{measurements:[],unquantified:false,analysis:true});
-  assert.equal(summaryTimeLabel({value:340,unit:'ks'}),'≈ 94.4 h');
-  assert.equal(summaryTimeLabel({value:120,unit:'ks'}),'≈ 33.3 h');
+  assert.deepEqual(row.pi,{measurements:[],unquantified:1,analysis:0});
+  assert.deepEqual(row.collaboration,{measurements:[],unquantified:0,analysis:2});
+  assert.equal(summaryTimeLabel({value:340,unit:'ks'}),'340 ks');
+  assert.equal(summaryTimeLabel({value:120,unit:'ks'}),'120 ks');
+  assert.equal(summaryTimeLabel({value:9.3,unit:'nights'}),'9 nights');
+  assert.equal(summaryTimeLabel({value:21.71,unit:'nights'}),'22 nights');
+  assert.equal(summaryTimeLabel({value:60.7,unit:'hours'}),'61 h');
+  assert.equal(summaryTimeLabel({value:161.3,unit:'hours'}),'161 h');
+  assert.equal(summaryTimeLabel({value:0.5,unit:'nights'}),'½ night');
   assert.equal(summaryTimeLabel({value:1,unit:'nights'}),'1 night');
   assert.equal(summaryTimeLabel({value:2,unit:'orbits'}),'2 orbits');
+});
+
+test('Summary order follows wavelength groups regardless of input order', () => {
+  const records=['VLA','ALMA','Subaru','Chandra','JWST','Keck','JCMT','NOEMA','MeerKAT','uGMRT'].map((facility,i)=>record('telescope-'+i,{value:1,unit:'hours',basis:'allocated'},{facility}));
+  assert.deepEqual(summarizeProposals(records,'2026-09-10').facilities.map(row=>row.facility),['Chandra','Subaru','Keck','JWST','JCMT','ALMA','NOEMA','VLA','MeerKAT','uGMRT']);
 });
 
 test('Public data is an aggregate-only schema with separate US funding attribution', () => {
@@ -36,6 +46,7 @@ test('Public data is an aggregate-only schema with separate US funding attributi
     assert.deepEqual(Object.keys(row).sort(),['collaboration','facility','id','pi']);
     for(const role of ['pi','collaboration']){
       assert.deepEqual(Object.keys(row[role]).sort(),['analysis','measurements','unquantified']);
+      for(const field of ['analysis','unquantified']) assert.ok(Number.isInteger(row[role][field]) && row[role][field]>=0);
       for(const time of row[role].measurements){
         assert.ok(time.value>0 && Number.isFinite(time.value));
         assert.ok(['allocated','requested','observed'].includes(time.basis));
@@ -45,7 +56,11 @@ test('Public data is an aggregate-only schema with separate US funding attributi
     }
   }
   assert.equal(publicSummary.support.administrativePi,'Martin Elvis');
+  assert.equal(publicSummary.support.cycle,'Cycle 27');
+  assert.equal(publicSummary.support.administrativePiAffiliation,'Center for Astrophysics | Harvard & Smithsonian');
   assert.equal(publicSummary.support.amount,61320);
   assert.equal(publicSummary.support.status,'approved');
   assert.match(publicSummary.support.scope,/including Co-I/);
+  assert.deepEqual(publicSummary.facilities.find(row=>row.facility==='NOEMA').pi.measurements,[{value:10,unit:'hours',basis:'allocated'}]);
+  assert.equal(publicSummary.facilities.find(row=>row.facility==='Roman').collaboration.analysis,1);
 });

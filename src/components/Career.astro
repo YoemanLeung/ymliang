@@ -2,6 +2,7 @@
 import data from '../data/academic.json';
 import {localUrl} from '../lib/publications.mjs';
 import ProgramSupport from './ProgramSupport.astro';
+import ProfessionalService from './ProfessionalService.astro';
 ---
 <section class="content-section" id="cv" aria-labelledby="cv-heading">
   <div class="section-heading"><span class="eyebrow">05 / CURRICULUM VITAE</span><h2 id="cv-heading">A path through astronomy</h2></div>
@@ -18,4 +19,6 @@ import ProgramSupport from './ProgramSupport.astro';
   <p class="funding-line"><a href="https://kaken.nii.ac.jp/en/grant/KAKENHI-PROJECT-24K17084/">JSPS KAKENHI 24K17084</a> · Principal Investigator · Early-Career Scientists · 2024–2027</p>
   <p class="funding-line"><a href="https://kaken.nii.ac.jp/en/grant/KAKENHI-PROJECT-25H00663/">JSPS KAKENHI 25H00663</a> · Co-Investigator · Scientific Research (A) · 2025–2030</p>
   <ProgramSupport />
+  <h3 class="funding-heading">Professional service & membership</h3>
+  <ProfessionalService />
 </section>

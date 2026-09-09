@@ -31,7 +31,11 @@ for(const route of routes){
   if(hasSummary){
     for(const row of summary.facilities)for(const role of ['pi','collaboration'])for(const time of row[role].measurements)assert.ok(html.includes(summaryTimeLabel(time)),'missing telescope time');
     assert.ok(html.includes('US$61,320 approved') && html.includes('U.S. administrative PI: Martin Elvis'));
-    assert.ok(html.includes('Grade C requests') && html.includes('Observed'));
+    assert.ok(html.includes('Grade C requests') && html.includes('Chandra Cycle 27'));
+    assert.ok(!/Unquantified|unquantified time|>Observed<|Funding policy/.test(html));
+    assert.ok(html.includes('1 Analysis program'));
+    assert.ok(html.includes('Journal referee:'));
+    for(const journal of data.profile.peer_review_journals) assert.ok(html.replaceAll('&amp;','&').includes(journal),'missing reviewer service');
   }
   const allIds=[...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);
   assert.equal(new Set(allIds).size,allIds.length,route+' contains duplicate element IDs');

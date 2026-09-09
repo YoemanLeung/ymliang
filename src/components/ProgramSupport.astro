@@ -2,4 +2,4 @@
 import {support} from '../data/observing-summary.json';
 const amount = 'US$'+support.amount.toLocaleString('en-US');
 ---
-<p class="program-support" id="chandra-support"><strong>Chandra · Science PI · Associated U.S. observing grant</strong><br />{amount} approved in total for U.S. investigators, including Co-I grants. U.S. administrative PI: {support.administrativePi}. <a href={support.policyUrl}>Funding policy</a></p>
+<p class="program-support" id="chandra-support"><strong>Chandra {support.cycle} · Science PI · Associated U.S. observing grant</strong><br />{amount} approved for U.S. investigators, including Co-I grants. U.S. administrative PI: {support.administrativePi} ({support.administrativePiAffiliation}).</p>

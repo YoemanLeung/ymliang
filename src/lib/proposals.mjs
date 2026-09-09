@@ -23,19 +23,32 @@ export function chronologicalProposals(records) {
   return [...records].sort((a, b) => b.year - a.year || a.facility.localeCompare(b.facility) || b.cycle.localeCompare(a.cycle, 'en', {numeric: true}) || a.id.localeCompare(b.id));
 }
 
-export function proposalsByYear(records) {
-  const groups = new Map();
-  for (const proposal of chronologicalProposals(records)) {
-    if (!groups.has(proposal.year)) groups.set(proposal.year, []);
-    groups.get(proposal.year).push(proposal);
+/** Export totals only. Project IDs, titles, teams, and source links stay in the local archive. */
+export function summarizeProposals(records, updated) {
+  const ordered = chronologicalProposals(records);
+  if (!ordered.length) throw new Error('Cannot summarize an empty proposal archive');
+  const facilities = new Map();
+  const empty = () => ({measurements: [], unquantified: false, analysis: false});
+  for (const record of ordered) {
+    if (!facilities.has(record.facility)) facilities.set(record.facility, {
+      id: record.facility.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      facility: record.facility, pi: empty(), collaboration: empty(),
+    });
+    const cell = facilities.get(record.facility)[record.role === 'PI' ? 'pi' : 'collaboration'];
+    if (record.kind === 'analysis') {cell.analysis = true; continue;}
+    if (!record.time) {cell.unquantified = true; continue;}
+    const {value, unit, basis} = record.time;
+    let total = cell.measurements.find(item => item.unit === unit && item.basis === basis);
+    if (!total) {total = {value: 0, unit, basis}; cell.measurements.push(total);}
+    total.value = Math.round((total.value + value) * 1e8) / 1e8;
   }
-  return [...groups].map(([year, proposals]) => ({year, proposals}));
+  return {updated, period: {start: ordered.at(-1).year, end: ordered[0].year},
+    facilities: [...facilities.values()].sort((a,b) => a.facility.localeCompare(b.facility))};
 }
 
-export function proposalTimeLabel(record) {
-  if (record.kind === 'analysis') return 'Analysis program';
-  if (!record.time) return record.state === 'grade-c' ? 'Grade C queue' : 'Approved program';
-  const {value, unit, basis} = record.time;
-  const label = unit === 'hours' ? 'h' : value === 1 && ['nights', 'orbits'].includes(unit) ? unit.slice(0, -1) : unit;
-  return `${value} ${label} ${basis === 'requested' ? 'requested' : basis === 'observed' ? 'observed' : 'awarded'}`;
+export function summaryTimeLabel({value, unit}) {
+  const amount = unit === 'ks' ? value / 3.6 : value;
+  const number = new Intl.NumberFormat('en-US', {maximumFractionDigits: unit === 'ks' ? 1 : 2}).format(amount);
+  const label = ['hours','ks'].includes(unit) ? 'h' : amount === 1 ? unit.slice(0,-1) : unit;
+  return `${unit === 'ks' ? '≈ ' : ''}${number} ${label}`;
 }

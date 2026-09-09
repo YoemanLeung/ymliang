@@ -1,41 +1,51 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {chronologicalProposals, proposalsByYear, proposalTimeLabel} from '../src/lib/proposals.mjs';
-const records = JSON.parse(await readFile(new URL('../src/data/proposals.json', import.meta.url), 'utf8'));
+import {summarizeProposals, summaryTimeLabel} from '../src/lib/proposals.mjs';
+const publicSummary = JSON.parse(await readFile(new URL('../src/data/observing-summary.json', import.meta.url), 'utf8'));
+const record = (id, time, extra={}) => ({id,year:2025,cycle:'Cycle 1',facility:'Example telescope',pi:'Example investigator',role:'PI',title:'Local-only proposal',state:'awarded',kind:'observing',time,...extra});
 
-test('Program catalog retains every role in descending years without mutating input', () => {
+test('Telescope totals separate roles, units, and requested/observed time', () => {
+  const records = [record('a',{value:1.2,unit:'nights',basis:'allocated'}),record('b',{value:2.1,unit:'nights',basis:'allocated'}),record('c',{value:6,unit:'hours',basis:'requested'},{state:'grade-c'}),record('d',{value:8,unit:'hours',basis:'allocated'},{role:'Co-I'}),record('e',{value:2,unit:'hours',basis:'allocated'},{role:'Collaborator'}),record('f',{value:3,unit:'hours',basis:'observed'},{role:'Co-I'})];
   const original = structuredClone(records);
-  const ordered = chronologicalProposals(records);
-  const groups = proposalsByYear(records);
-  assert.deepEqual(records, original);
-  assert.deepEqual(groups.flatMap(group => group.proposals), ordered);
-  assert.equal(new Set(ordered.map(record => record.id)).size, records.length);
-  for (let index = 1; index < groups.length; index++) assert.ok(groups[index-1].year > groups[index].year);
-  assert.deepEqual(new Set(ordered.map(record => record.role)), new Set(['PI', 'Co-I', 'Collaborator']));
-  assert.throws(() => chronologicalProposals([...records, records[0]]), /duplicate/);
+  const summary = summarizeProposals(records,'2026-09-10');
+  assert.deepEqual(records,original);
+  assert.deepEqual(summary.facilities[0].pi.measurements,[{value:3.3,unit:'nights',basis:'allocated'},{value:6,unit:'hours',basis:'requested'}]);
+  assert.deepEqual(summary.facilities[0].collaboration.measurements,[{value:10,unit:'hours',basis:'allocated'},{value:3,unit:'hours',basis:'observed'}]);
+  assert.ok(!JSON.stringify(summary).includes('Local-only proposal'));
+  assert.ok(!JSON.stringify(summary).includes('Example investigator'));
+  assert.throws(() => summarizeProposals([...records,records[0]],'2026-09-10'),/duplicate/);
+  assert.throws(() => summarizeProposals([record('g',{value:1,unit:'hours',basis:'allocated'},{state:'grade-c'})],'2026-09-10'),/guaranteed/);
 });
 
-test('Time labels distinguish conditional requests, observed time, and analysis awards', () => {
-  const conditional = records.find(record => record.programId === '2025.1.01243.S');
-  assert.equal(proposalTimeLabel(conditional), '15.8 h requested');
-  assert.throws(() => chronologicalProposals([{...conditional,time:{...conditional.time,basis:'allocated'}}]), /guaranteed/);
-  const analysis = records.find(record => record.programId === 'Roman-19061');
-  assert.equal(proposalTimeLabel(analysis), 'Analysis program');
-  assert.equal(analysis.time, null);
-  assert.throws(() => chronologicalProposals([{...analysis,time:{value:1,unit:'hours',basis:'allocated'}}]), /Analysis/);
-  assert.equal(proposalTimeLabel(records.find(record => record.programId === '41_103')), '39 h observed');
-  assert.equal(proposalTimeLabel(records.find(record => record.programId === '2025B-643331')), '1 night awarded');
+test('Unknown allocations and analysis programs never become zero or invented hours', () => {
+  const summary = summarizeProposals([record('a',null),record('b',null,{role:'Co-I',kind:'analysis'})],'2026-09-10');
+  const row = summary.facilities[0];
+  assert.deepEqual(row.pi,{measurements:[],unquantified:true,analysis:false});
+  assert.deepEqual(row.collaboration,{measurements:[],unquantified:false,analysis:true});
+  assert.equal(summaryTimeLabel({value:340,unit:'ks'}),'≈ 94.4 h');
+  assert.equal(summaryTimeLabel({value:120,unit:'ks'}),'≈ 33.3 h');
+  assert.equal(summaryTimeLabel({value:1,unit:'nights'}),'1 night');
+  assert.equal(summaryTimeLabel({value:2,unit:'orbits'}),'2 orbits');
 });
 
-test('Chandra science leadership and associated US support retain separate attribution', () => {
-  const program = records.find(record => record.programId === '27700187');
-  assert.equal(program.pi, 'Yongming Liang');
-  assert.equal(program.role, 'PI');
-  assert.equal(proposalTimeLabel(program), '340 ks awarded');
-  assert.equal(program.support.administrativePi, 'Martin Elvis');
-  assert.equal(program.support.amount, 61320);
-  assert.match(program.support.scope, /including Co-I/);
-  assert.equal(program.support.status, 'approved');
-  assert.throws(() => chronologicalProposals([{...program,support:{...program.support,administrativePi:null}}]), /support/);
+test('Public data is an aggregate-only schema with separate US funding attribution', () => {
+  assert.equal(publicSummary.facilities.length,15);
+  assert.equal(new Set(publicSummary.facilities.map(row=>row.id)).size,15);
+  for(const row of publicSummary.facilities){
+    assert.deepEqual(Object.keys(row).sort(),['collaboration','facility','id','pi']);
+    for(const role of ['pi','collaboration']){
+      assert.deepEqual(Object.keys(row[role]).sort(),['analysis','measurements','unquantified']);
+      for(const time of row[role].measurements){
+        assert.ok(time.value>0 && Number.isFinite(time.value));
+        assert.ok(['allocated','requested','observed'].includes(time.basis));
+        assert.ok(['hours','nights','ks','orbits'].includes(time.unit));
+        assert.deepEqual(Object.keys(time).sort(),['basis','unit','value']);
+      }
+    }
+  }
+  assert.equal(publicSummary.support.administrativePi,'Martin Elvis');
+  assert.equal(publicSummary.support.amount,61320);
+  assert.equal(publicSummary.support.status,'approved');
+  assert.match(publicSummary.support.scope,/including Co-I/);
 });

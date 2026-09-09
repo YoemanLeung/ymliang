@@ -1,22 +1,21 @@
 ---
-import records from '../data/proposals.json';
-import {proposalsByYear} from '../lib/proposals.mjs';
-import {localUrl} from '../lib/publications.mjs';
-import YearBrowser from './YearBrowser.astro';
-import ProposalYears from './ProposalYears.astro';
-import ProgramSupport from './ProgramSupport.astro';
-const {standalone = false} = Astro.props;
-const groups = proposalsByYear(records);
-const piCount = records.filter(record => record.role === 'PI').length;
+import summary from '../data/observing-summary.json';
+import ObservingCell from './ObservingCell.astro';
+const {document = false} = Astro.props;
 ---
 <section class="content-section proposals-section" id="proposals" aria-labelledby="proposals-heading">
-  <div class="section-heading"><span class="eyebrow">04 / PROPOSALS</span><h2 id="proposals-heading">Observing & research programs</h2></div>
-  <div class="publication-intro"><p>Programs I lead and contribute to across the electromagnetic spectrum.</p>{!standalone && <a href={localUrl('proposals/')}>Dedicated reading view <span aria-hidden="true">↗</span></a>}</div>
-  <p class="catalog-note">{records.length} entries · {piCount} as PI · {records.length-piCount} as Co-I or collaborator · {groups.at(-1).year}–{groups[0].year}</p>
-  <p class="proposal-guide">Organized by selection year or cycle start, newest first. Time awards, conditional queues, and analysis programs are labeled separately; an award does not imply completed observations.</p>
-  <YearBrowser id="proposal" prefix="proposal-year-" label="Observing and research programs" singular="entry" plural="entries" years={groups.map(group => group.year)} summary={`${groups.length} years · ${records.length} entries`}>
-    <ProposalYears />
-  </YearBrowser>
-  <p class="talk-note">Joint facilities and repeat semesters have separate entries; the list includes ALMA Grade C programs. Times describe program allocations, with requested or observed time explicitly labeled. Recovered records are current through September 2026.</p>
-  <ProgramSupport />
+  <div class="section-heading">{!document && <span class="eyebrow">04 / PROPOSALS</span>}<h2 id="proposals-heading">Observing time</h2></div>
+  <p class="proposal-guide">Telescope time for PI-led projects and collaborations · {summary.period.start}–{summary.period.end}</p>
+  <div class="observing-table-wrap">
+    <table class="observing-table" aria-describedby="observing-notes">
+      <caption class="sr-only">Recorded telescope time by facility and role</caption>
+      <thead><tr><th scope="col">Telescope</th><th scope="col">PI</th><th scope="col">Co-I / collaborator</th></tr></thead>
+      <tbody>{summary.facilities.map(row => <tr data-facility={row.id}>
+        <th scope="row">{row.facility}</th>
+        <td><ObservingCell cell={row.pi} /></td>
+        <td><ObservingCell cell={row.collaboration} /></td>
+      </tr>)}</tbody>
+    </table>
+  </div>
+  <p class="observing-notes" id="observing-notes">Recorded semester allocations, including repeat awards; not completed observing time. Grade C requests and observed time are labeled. Unquantified allocations are excluded from totals.</p>
 </section>

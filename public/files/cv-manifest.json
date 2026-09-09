@@ -1,7 +1,7 @@
 {
   "content_sha256": "680b7f1898642cfd7978a790454b024998446725d74f270865c01730da3ef601",
-  "proposals_sha256": "6853472eb821d03c44354e2afb801eed45c1bcdf95f7469c0fb2c5bb9246d385",
-  "updated": "2026-09-09",
+  "observing_summary_sha256": "e14aa6713f5003de3c2d42b0403e72b392c9b9384498b218043ece92eb46373a",
+  "updated": "2026-09-10",
   "papers": 38,
-  "proposals": 50
+  "telescopes": 15
 }

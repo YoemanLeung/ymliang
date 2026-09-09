@@ -22,6 +22,7 @@
   .skip-link:focus {top:12px}
   .eyebrow {font-size:.8rem;letter-spacing:.16em;color:var(--accent);font-weight:600;line-height:1.6}
   .muted {color:var(--muted)}
+  .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
   .button {display:inline-flex;align-items:center;justify-content:center;padding:10px 19px;border:1px solid var(--line);border-radius:4px;text-decoration:none;font-weight:500;font-size:.9rem}
   .button.primary {background:var(--ink);color:var(--bg);border-color:var(--ink)}
 }
@@ -184,25 +185,19 @@
   .funding-heading {margin:24px 0 15px}
   .funding-line {font-size:.87rem;color:var(--muted)}
   .proposal-guide {font-size:.86rem;color:var(--muted);margin:16px 0 24px;max-width:850px}
-  .proposal-list {list-style:none;margin:0;padding:0;min-width:0}
-  .proposal {border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:24px;overflow-wrap:anywhere}
-  .proposal-list li:last-child .proposal {border-bottom:0;margin-bottom:0}
-  .proposal-meta {display:flex;flex-wrap:wrap;align-items:center;gap:7px 14px;font-size:.75rem;color:var(--muted);margin-bottom:12px}
-  .proposal-role {padding:1px 8px;border:1px solid var(--line);border-radius:3px;color:var(--accent)}
-  .proposal-pi {border-color:var(--accent);font-weight:600}
-  .proposal-code {font-variant-numeric:tabular-nums}
-  .proposal-facility {display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:baseline;font-size:1.03rem}
-  .proposal-time {font-size:.86rem;color:var(--accent);white-space:nowrap}
-  .proposal h4 {font-size:1rem;line-height:1.6;margin:10px 0 6px;font-weight:500}
-  .proposal-team,.proposal-note {font-size:.83rem;color:var(--muted);line-height:1.65}
-  .proposal p+p {margin-top:5px}
-  .proposal-source {display:inline-block;margin-top:8px;font-size:.8rem;text-decoration:none}
-  .program-support {margin-top:28px;padding:22px 25px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;background:var(--soft);scroll-margin-top:145px}
-  .program-support h3 {font-size:1rem;margin-bottom:12px}
-  .program-support p {font-size:.86rem;color:var(--muted);line-height:1.7}
-  .program-support p+p {margin-top:8px}
+  .observing-table-wrap {border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--soft)}
+  .observing-table {width:100%;border-collapse:collapse;table-layout:fixed;font-size:.9rem;text-align:left;line-height:1.5}
+  .observing-table th,.observing-table td {padding:12px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+  .observing-table thead th {font-size:.75rem;letter-spacing:.04em;color:var(--muted);font-weight:500}
+  .observing-table tbody th {font-weight:500;width:32%}
+  .observing-table tr:last-child th,.observing-table tr:last-child td {border-bottom:0}
+  .observing-value {display:block;font-variant-numeric:tabular-nums}
+  .observing-value strong {font-weight:500;color:var(--accent)}
+  .observing-value small,.observing-unquantified {display:block;font-size:.73rem;color:var(--muted)}
+  .observing-empty {color:var(--muted)}
+  .observing-notes,.program-support {margin-top:16px;font-size:.78rem;color:var(--muted);line-height:1.7}
+  .program-support {scroll-margin-top:145px;font-size:.87rem}
   .program-support strong {color:var(--ink);font-weight:500}
-  .program-support .program-support-policy {font-size:.78rem}
   .talk-list {list-style:none;margin:0;padding:0;min-width:0}
   .talk-list article {display:grid;grid-template-columns:105px minmax(0,1fr);gap:24px;padding-bottom:25px;margin-bottom:24px;border-bottom:1px solid var(--line)}
   .talk-list li:last-child article {border-bottom:0;margin-bottom:0}
@@ -226,7 +221,7 @@
   .cv-document .cv-top {display:flex;justify-content:space-between;align-items:start;gap:25px;padding-bottom:28px;border-bottom:1px solid var(--line)}
   .cv-document .cv-top h1 {font-size:2.7rem;margin:8px 0 15px}
   .cv-document .cv-top p {font-size:.9rem;color:var(--muted)}
-  .cv-document .cv-top img {width:106px;border-radius:3px}
+  .cv-document .cv-top img {width:144px;flex-shrink:0;border-radius:3px}
   .cv-document .cv-block {margin-top:28px}
   .cv-document .cv-block h2 {font-size:1.55rem;margin-bottom:15px}
   .cv-document .cv-block ul {padding-left:22px}
@@ -292,7 +287,11 @@
   @media(max-width:780px) {
     .career-grid {grid-template-columns:1fr;gap:24px}
     nav {flex-wrap:wrap;justify-content:flex-start;gap:6px 16px}
-    .program-support {padding:18px}
+    .observing-table {font-size:.83rem}
+    .observing-table th,.observing-table td {padding:10px 9px}
+    .observing-table thead th {font-size:.69rem;letter-spacing:0}
+    .observing-value small,.observing-unquantified {font-size:.68rem}
+    .cv-document .cv-top {flex-wrap:wrap}
     .publication-year,.space .publication-year {grid-template-columns:1fr;gap:17px}
     .publication-year>h3 {font-size:1.6rem}
     .talk-list article {grid-template-columns:1fr;gap:7px}
@@ -328,8 +327,9 @@
     .space-hero,.cv-actions,.year-jumps,.publication-intro,.site-footer,.catalog-note {display:none!important}
     .cv-document {margin:0;padding:0;max-width:none}
     .cv-document .cv-top h1 {font-size:27pt}.cv-document .cv-top p{font-size:10pt}
-    .cv-document .cv-top img{width:75px}.cv-document .cv-block{margin-top:16px;break-inside:avoid}
-    .cv-document .cv-block h2{font-size:15pt;margin-bottom:10px}.cv-document .cv-block li{font-size:10pt;line-height:1.45;margin:7px 0}
+    .cv-document .cv-top{padding-bottom:20px;flex-wrap:nowrap}
+    .cv-document .cv-top img{width:130px}.cv-document .cv-block{margin-top:12px;break-inside:avoid}
+    .cv-document .cv-block h2{font-size:15pt;margin-bottom:8px}.cv-document .cv-block li{font-size:10pt;line-height:1.45;margin:6px 0}
     .cv-document .cv-block p{font-size:10pt;line-height:1.5}
     .cv-document>.publications-section,.cv-document>.proposals-section{break-before:page}
     .cv-document .content-section{padding:20px 0;break-inside:auto}
@@ -339,17 +339,13 @@
     .paper{break-inside:avoid;padding-bottom:12px;margin-bottom:12px}
     .paper h4{font-size:10pt}.paper-meta{font-size:8pt}.paper-authors,.paper-venue,.paper-links{font-size:8.5pt}
     .cv-document .proposal-guide{font-size:9pt;line-height:1.5;margin:12px 0 16px}
-    .cv-document .program-support{break-inside:avoid;margin:16px 0 8px;padding:12px 15px}
-    .cv-document .program-support h3{font-size:10pt;margin-bottom:8px}
-    .cv-document .program-support p{font-size:9pt;line-height:1.45}
-    .cv-document .program-support .program-support-policy{font-size:8pt}
-    .cv-document .proposal{break-inside:avoid;padding-bottom:10px;margin-bottom:10px}
-    .cv-document .proposal-meta{font-size:8pt;gap:5px 12px;margin-bottom:6px}
-    .cv-document .proposal-facility{font-size:10pt;line-height:1.5}
-    .cv-document .proposal-time{font-size:9pt}
-    .cv-document .proposal h4{font-size:9.5pt;line-height:1.4;margin:5px 0}
-    .cv-document .proposal-team,.cv-document .proposal-note,.cv-document .proposal-source{font-size:8.5pt;line-height:1.4}
-    .cv-document .proposal-source{margin-top:4px}
+    .cv-document .observing-table{font-size:9pt;line-height:1.4}
+    .cv-document .observing-table th,.cv-document .observing-table td{padding:7px 12px}
+    .cv-document .observing-table tr{break-inside:avoid}
+    .cv-document .observing-table thead th{font-size:8pt}
+    .cv-document .observing-value small,.cv-document .observing-unquantified{font-size:7.5pt}
+    .cv-document .observing-notes,.cv-document .program-support{font-size:8pt;line-height:1.5;margin-top:12px;break-inside:avoid}
+    .cv-document .cv-block .program-support{font-size:10pt;line-height:1.45;margin:0}
     a{color:#173b56;text-decoration:none}.preprint-label{font-size:7pt}
   }
 }

@@ -1,7 +1,15 @@
 ---
-import Base from '../layouts/Base.astro';
-import Proposals from '../components/Proposals.astro';
+import {localUrl} from '../lib/publications.mjs';
+const destination = localUrl()+'#proposals';
 ---
-<Base title="Observing & research programs | Yongming Liang" description="Awarded observing proposals, conditional observing programs, and research collaborations of Yongming Liang, organized by year.">
-  <main id="main" class="reading-page"><Proposals standalone /></main>
-</Base>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={'0;url='+destination} />
+    <title>Observing time | Yongming Liang</title>
+    <script is:inline define:vars={{destination}}>window.location.replace(destination);</script>
+  </head>
+  <body><a href={destination}>Continue to the observing-time summary</a></body>
+</html>

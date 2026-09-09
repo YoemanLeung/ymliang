@@ -1,0 +1,12 @@
+---
+import {summaryTimeLabel} from '../lib/proposals.mjs';
+const {cell} = Astro.props;
+---
+{cell.measurements.map(time => <span class="observing-value" title={time.unit === 'ks' ? time.value+' ks' : undefined}>
+  <strong>{summaryTimeLabel(time)}</strong>
+  {time.basis === 'requested' && <small>Grade C requests</small>}
+  {time.basis === 'observed' && <small>Observed</small>}
+</span>)}
+{cell.unquantified && <span class="observing-unquantified">{cell.measurements.length ? '+ unquantified time' : 'Approved; time unquantified'}</span>}
+{cell.analysis && <span class="observing-unquantified">Analysis program</span>}
+{!cell.measurements.length && !cell.unquantified && !cell.analysis && <span class="observing-empty" aria-label="No recorded allocation">—</span>}

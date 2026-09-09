@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Publications from '../components/Publications.astro';
-import ProposalCV from '../components/ProposalCV.astro';
+import Proposals from '../components/Proposals.astro';
+import ProgramSupport from '../components/ProgramSupport.astro';
 import data from '../data/academic.json';
 import { localUrl } from '../lib/publications.mjs';
 ---
@@ -15,9 +16,9 @@ import { localUrl } from '../lib/publications.mjs';
     <section class="cv-block"><h2>Research interests</h2><p>Galaxy evolution; the galaxy–IGM connection; quasars and supermassive black holes; protoclusters and large-scale structure; high-redshift galaxies and cosmic reionization.</p></section>
     <section class="cv-block"><h2>Appointments</h2><ul>{data.profile.appointments.map(job=><li><strong>{job.start}–{job.end || 'present'} · {job.role}</strong><br />{job.institution}</li>)}<li><strong>Jan–Feb 2024 · Visiting Researcher</strong><br />University of Milano-Bicocca; host: Sebastiano Cantalupo</li></ul></section>
     <section class="cv-block"><h2>Education</h2><ul><li><strong>2017–2022 · Ph.D., SOKENDAI</strong><br />Astronomy research based at NAOJ. Thesis: <em>Correlation between galaxy and IGM H I at z ≈ 2 mapped by Subaru/HSC</em>. Supervisors: Nobunari Kashikawa and Masayuki Tanaka.</li><li><strong>2013–2017 · Bachelor's degree in astronomy</strong><br />University of Science and Technology of China. Supervisor: Junxian Wang.</li></ul></section>
-    <section class="cv-block"><h2>Research funding</h2><ul><li><strong>2024–2027 · Principal Investigator · JSPS KAKENHI 24K17084</strong><br />Early-Career Scientists. Elucidating the Trigger and Feedback Mechanisms of the Most Concentrated Quasars at Cosmic Noon. JPY 4,550,000 including indirect costs; JPY 3,500,000 direct.</li><li><strong>2025–2030 · Co-Investigator · JSPS KAKENHI 25H00663</strong><br />Scientific Research (A). Galaxy Overdense Regions in the Distant Universe Revealed by Wide-Area Sky Survey and TAO. PI: Nobunari Kashikawa.</li></ul></section>
+    <section class="cv-block"><h2>Research funding</h2><ul><li><strong>2024–2027 · Principal Investigator · JSPS KAKENHI 24K17084</strong><br />Early-Career Scientists. Elucidating the Trigger and Feedback Mechanisms of the Most Concentrated Quasars at Cosmic Noon. JPY 4,550,000 including indirect costs; JPY 3,500,000 direct.</li><li><strong>2025–2030 · Co-Investigator · JSPS KAKENHI 25H00663</strong><br />Scientific Research (A). Galaxy Overdense Regions in the Distant Universe Revealed by Wide-Area Sky Survey and TAO. PI: Nobunari Kashikawa.</li><li><ProgramSupport /></li></ul></section>
     <section class="cv-block"><h2>Professional service & membership</h2><ul><li>JCMT Time Allocation Committee, September 2023–November 2025.</li><li>International Astronomical Union member, since June 2024.</li><li>Astronomical Society of Japan member, since October 2017.</li></ul></section>
-    <ProposalCV />
+    <Proposals document />
     <Publications standalone />
   </main>
 </Base>

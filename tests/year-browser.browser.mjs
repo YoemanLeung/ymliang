@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {readFile, mkdir} from 'node:fs/promises';
 import {join} from 'node:path';
+const summary = JSON.parse(await readFile(new URL('../src/data/observing-summary.json',import.meta.url),'utf8'));
+
 import {serveOutput} from '../scripts/serve-output.mjs';
-import {chronologicalProposals} from '../src/lib/proposals.mjs';
-const proposalRecords = chronologicalProposals(JSON.parse(await readFile(new URL('../src/data/proposals.json', import.meta.url), 'utf8')));
 
 const server = process.env.TEST_BUILT_OUTPUT === '1' ? await serveOutput('dist', process.env.SITE_BASE || '/') : null;
 const base = (server?.url || process.env.TEST_BASE_URL || 'http://127.0.0.1:4321').replace(/\/$/, '');
@@ -30,10 +30,18 @@ try {
   await page.goto(base + '/#talks', {waitUntil: 'networkidle'});
   const talks = page.locator('year-browser[data-prefix="talk-year-"]');
   const papers = page.locator('year-browser[data-prefix="year-"]');
-  const proposals = page.locator('year-browser[data-prefix="proposal-year-"]');
+  const proposals = page.locator('#proposals');
+  assert.equal(await proposals.locator('year-browser').count(),0);
+  assert.deepEqual(await proposals.locator('[data-facility]').evaluateAll(rows=>rows.map(row=>row.dataset.facility)),summary.facilities.map(row=>row.id));
+  assert.equal(await page.locator('[data-proposal-id]').count(),0);
+  assert.equal(await page.locator('#cv #chandra-support').count(),1);
+  assert.equal(await proposals.locator('#chandra-support').count(),0);
+  if(process.env.QA_OUTPUT_DIR){
+    await mkdir(process.env.QA_OUTPUT_DIR,{recursive:true});
+    await proposals.screenshot({path:join(process.env.QA_OUTPUT_DIR,'summary-desktop.png')});
+  }
   await checkYear(talks, '2026');
   await checkYear(papers, '2026');
-  await checkYear(proposals, '2026');
   assert.equal(await talks.locator('[data-newer]').isDisabled(), true);
   await talks.locator('[data-older]').click();
   await checkYear(talks, '2025');
@@ -57,34 +65,10 @@ try {
   await talks.locator('.publication-scroll').evaluate(element => { element.scrollTop = 250; });
   await talks.locator('[data-older]').click();
   await checkYear(talks, '2024');
-
-  const proposalIds = [];
-  for (const year of await proposals.locator('option').evaluateAll(options => options.map(option => option.value))) {
-    await proposals.locator('select').selectOption(year);
-    await checkYear(proposals, year);
-    proposalIds.push(...await proposals.locator('[data-year]:not([hidden]) [data-proposal-id]').evaluateAll(items => items.map(item => item.dataset.proposalId)));
-  }
-  assert.deepEqual(proposalIds, proposalRecords.map(record => record.id));
-  assert.equal(await proposals.locator('[data-older]').isDisabled(), true);
-  await proposals.locator('select').selectOption('2024');
-  await proposals.locator('.publication-scroll').evaluate(element => { element.scrollTop = 300; });
-  await proposals.locator('[data-newer]').click();
-  await checkYear(proposals, '2025');
-  assert.equal(await proposals.locator('.publication-scroll').evaluate(element => element.scrollTop), 0);
-  await checkYear(papers, '2026');
-  await checkYear(talks, '2024');
-  assert.equal(new URL(page.url()).hash, '#proposal-year-2025');
   assert.equal(await talks.locator('.publication-scroll').evaluate(element => element.scrollTop), 0);
   await papers.locator('select').selectOption('2023');
   await checkYear(papers, '2023');
   await checkYear(talks, '2024');
-  await checkYear(proposals, '2025');
-
-  if (process.env.QA_OUTPUT_DIR) {
-    await mkdir(process.env.QA_OUTPUT_DIR, {recursive: true});
-    await page.goto(base + '/proposals/', {waitUntil: 'networkidle'});
-    await page.screenshot({path:join(process.env.QA_OUTPUT_DIR, 'proposals-desktop.png'), fullPage:true});
-  }
 
   // Direct links, standalone route, and narrow screen use the same working controls.
   await page.setViewportSize({width: 390, height: 844});
@@ -103,27 +87,25 @@ try {
   await checkYear(papers, '2024');
   await papers.locator('[data-newer]').click();
   await checkYear(papers, '2025');
-  await page.goto(base + '/proposals/#proposal-year-2024', {waitUntil:'networkidle'});
-  await checkYear(proposals, '2024');
-  await proposals.locator('[data-newer]').click();
-  await checkYear(proposals, '2025');
-  await proposals.locator('[data-newer]').click();
-  await checkYear(proposals, '2026');
-  assert.equal(await proposals.locator('[data-newer]').isDisabled(), true);
-  const proposalFrame = await proposals.locator('.publication-scroll').evaluate(element => ({height:element.clientHeight, overflow:getComputedStyle(element).overflowY}));
-  assert.ok(proposalFrame.height >= 320 && proposalFrame.height <= 544);
-  assert.equal(proposalFrame.overflow, 'auto');
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
-  if (process.env.QA_OUTPUT_DIR) {
-    await page.evaluate(() => {document.activeElement?.blur(); window.scrollTo(0, 0);});
-    await page.screenshot({path:join(process.env.QA_OUTPUT_DIR, 'proposals-mobile.png'), fullPage:true});
-  }
-  // The continuous CV includes every program and remains readable without scripts.
-  await page.goto(base + '/cv/', {waitUntil:'networkidle'});
-  assert.equal(await page.locator('script').count(), 0);
-  assert.equal(await page.locator('[data-proposal-id]').count(), proposalRecords.length);
+  await page.goto(base + '/proposals/#proposal-year-2024',{waitUntil:'networkidle'});
+  await page.waitForURL(base + '/#proposals');
+  assert.equal(await proposals.locator('[data-facility]').count(),summary.facilities.length);
+  assert.equal(await proposals.locator('year-browser').count(),0);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+  const bounds=await proposals.locator('table').boundingBox();
+  assert.ok(bounds.x>=0 && bounds.x+bounds.width<=390,'Summary fits the mobile width');
+  if(process.env.QA_OUTPUT_DIR) await proposals.screenshot({path:join(process.env.QA_OUTPUT_DIR,'summary-mobile.png')});
+  await page.goto(base+'/cv/',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('script').count(),0);
+  assert.equal(await page.locator('[data-proposal-id]').count(),0);
+  assert.equal(await page.locator('[data-facility]').count(),summary.facilities.length);
+  assert.equal(await page.locator('.cv-block #chandra-support').count(),1);
+  const portrait=page.locator('.cv-top img');
+  assert.ok((await portrait.getAttribute('src')).endsWith('yongming-liang-suit.jpg'));
+  await page.emulateMedia({media:'print'});
+  assert.ok((await portrait.boundingBox()).width>=125,'Printed CV portrait is enlarged');
   assert.deepEqual(errors, [], 'Browser initialization and navigation must not throw');
-  console.log(`Browser checks passed: all 58 presentations and ${proposalRecords.length} program entries, previous/next, year selection, boundaries, scroll reset, three independent catalogs, deep links, mobile layout, and continuous CV.`);
+  console.log('Browser checks passed: 15 telescope totals, no detailed proposals, legacy redirect, enlarged CV portrait, funding placement, 58 presentations, independent year controls, deep links, and mobile layout.');
 } finally {
   await browser?.close();
   await server?.close();

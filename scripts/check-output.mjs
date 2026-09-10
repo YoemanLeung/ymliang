@@ -62,6 +62,10 @@ for(const route of routes){
   } else if(route==='cv/index.html'||topicsByRoute.has(route))assert.equal(scriptBlocks.length,0,'CV and research pages must contain no client scripts');
   assert.equal(html.includes('id="cosmic-canvas"'),route==='index.html','3D scene belongs only to the homepage');
   if(route==='index.html'){
+    assert.ok(!/scene-caption|scene-key|Gas filaments/.test(html),'retired scene legend');
+    const catalogue=JSON.parse(await readFile(resolve(root,'data/cosmic-web.json'),'utf8'));
+    assert.ok(html.includes('data-source-url="'+base+'/data/'+catalogue.asset+'"'),'cosmic asset must respect Pages subpath');
+    assert.equal(createHash('sha256').update(await readFile(resolve(root,'data',catalogue.asset))).digest('hex'),catalogue.sha256,'cosmic asset checksum');
     assert.ok(html.indexOf('class="hero-profile"')<html.indexOf('id="about"'),'identity belongs in the hero');
     assert.ok(html.indexOf('id="cv"')<html.indexOf('id="publications"'),'career must precede publications');
   }

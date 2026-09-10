@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { chronologicalPapers, groupByYear } from '../src/lib/publications.mjs';
-import { createCosmicField } from '../src/lib/cosmic-field.mjs';
 
 const data=JSON.parse(readFileSync(new URL('../src/data/academic.json',import.meta.url),'utf8'));
 
@@ -35,13 +34,4 @@ test('real catalog has 38 unique papers with valid dated metadata',()=>{
   assert.equal(papers[0].bibcode,'2026arXiv260708264S');
   assert.equal(papers.at(-1).bibcode,'2019ApJ...870...45U');
   assert.deepEqual(groupByYear(papers).map(group=>group.year),[2026,2025,2024,2023,2022,2021,2020,2019]);
-});
-test('cosmic scene is finite, deterministic, and smaller on mobile',()=>{
-  const field=createCosmicField(7021,1),again=createCosmicField(7021,1),mobile=createCosmicField(7021,.55);
-  assert.deepEqual(field.positions,again.positions);
-  assert.equal(field.positions.length,field.colors.length);
-  assert.equal(field.positions.length,field.sizes.length*3);
-  assert.ok(field.sizes.length<25000);
-  assert.ok(mobile.sizes.length<field.sizes.length);
-  for(const values of Object.values(field))assert.ok(values.every(Number.isFinite));
 });

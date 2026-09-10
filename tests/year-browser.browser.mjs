@@ -5,6 +5,7 @@ import {join} from 'node:path';
 const summary = JSON.parse(await readFile(new URL('../src/data/observing-summary.json',import.meta.url),'utf8'));
 
 import {serveOutput} from '../scripts/serve-output.mjs';
+import {checkCosmicScene} from './cosmic-scene.browser.mjs';
 
 const server = process.env.TEST_BUILT_OUTPUT === '1' ? await serveOutput('dist', process.env.SITE_BASE || '/') : null;
 const base = (server?.url || process.env.TEST_BASE_URL || 'http://127.0.0.1:4321').replace(/\/$/, '');
@@ -143,6 +144,7 @@ try {
   await page.emulateMedia({media:'print'});
   assert.ok((await portrait.boundingBox()).width>=125,'Printed CV portrait is enlarged');
   assert.deepEqual(errors, [], 'Browser initialization and navigation must not throw');
+  await checkCosmicScene(browser,base);
   console.log('Browser checks passed: hero portrait and WebGL controls, career before publications, 14 telescope totals, concise public copy, CV, 58 presentations, year controls, and mobile layout.');
 } finally {
   await browser?.close();

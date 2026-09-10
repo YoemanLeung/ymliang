@@ -1,10 +1,14 @@
-<div class="cosmic-stage" data-cosmic-stage data-state="loading">
+---
+import catalogue from '../../public/data/cosmic-web.json';
+import {localUrl} from '../lib/publications.mjs';
+const {asset} = catalogue;
+---
+<div class="cosmic-stage" data-cosmic-stage data-source-url={localUrl(`data/${asset}`)} data-state="loading">
   <canvas id="cosmic-canvas" tabindex="0" aria-label="Illustrative 3D cosmic web. Drag to orbit, or use left and right arrow keys when focused. Home resets the view."></canvas>
   <div class="scene-controls" aria-label="Cosmic scene controls">
     <button id="motion-toggle" type="button" aria-pressed="false" disabled>Pause motion</button>
     <button id="scene-reset" type="button" disabled>Reset view</button>
   </div>
-  <div class="scene-caption"><span class="scene-key"><i class="gas-key"></i> Gas filaments <i class="galaxy-key"></i> Galaxies <i class="quasar-key"></i> Quasars</span></div>
   <span id="scene-status" class="sr-only" role="status">Illustrative cosmic web</span>
 </div>
 <script>

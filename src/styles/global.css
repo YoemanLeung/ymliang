@@ -262,10 +262,6 @@
   .scene-controls button {border:1px solid #405675;color:#bacfe8;background:#091020cc;border-radius:3px;padding:8px 13px;font-size:.79rem}
   .scene-controls button:hover {background:#172a44}
   .scene-controls button:disabled {opacity:.45}
-  .scene-caption {position:absolute;left:50%;bottom:42px;transform:translateX(-50%);z-index:3;font-size:.72rem;color:#aabbd4;pointer-events:none}
-  .scene-key {display:flex;align-items:center;gap:8px;font-size:.75rem}
-  .scene-key i {width:6px;height:6px;display:inline-block;border-radius:50%;margin-left:9px}
-  .gas-key {background:#579ff7}.galaxy-key {background:#f7d395}.quasar-key {background:#ff728b}
   .scroll-cue {position:absolute;bottom:45px;left:max(40px,calc((100vw - 1130px)/2));display:flex;align-items:center;gap:28px;z-index:4;font-size:.77rem;letter-spacing:.06em;color:#9eafc6;text-decoration:none}
   .scroll-cue span:last-child {font-size:1.3rem}
   .space-content {max-width:1080px;padding:0 40px 40px;margin:auto}
@@ -316,7 +312,6 @@
     .hero-profile .identity-links {grid-column:1/-1;margin-top:9px}
     .space-hero::after {background:linear-gradient(180deg,#04050a30 0%,transparent 65%,#04050a 100%)}
     .scene-controls {right:24px;bottom:25px}
-    .scene-caption {left:24px;bottom:80px;transform:none;max-width:90%}
     .scroll-cue {left:24px;bottom:28px;font-size:.7rem;gap:12px}
     .space-content {padding:0 25px 25px}
     .space-about {grid-template-columns:1fr;gap:30px;padding:55px 0}

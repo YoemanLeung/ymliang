@@ -1,0 +1,17 @@
+{
+  "asset": "cosmic-web-d819bfd93021.bin",
+  "sha256": "d819bfd930210146b5212de2fa9628ee18bb70fdc5d341d49b01d51e132be482",
+  "bytes": 379216,
+  "catalogue": "Croton et al. (2006) Mini-Millennium semi-analytic galaxy catalogue",
+  "source_url": "https://wwwmpa.mpa-garching.mpg.de/galform/agnpaper/croton_etal.ugriz.mini.ascii.tar.gz",
+  "source_sha256": "d675616d76a82e68435ed994aaa704255471eb421e082e4270104c4e850cb5fe",
+  "simulation_reference": "https://doi.org/10.1038/nature03597",
+  "galaxy_model_reference": "https://doi.org/10.1111/j.1365-2966.2005.09994.x",
+  "redshift": 0,
+  "box_size_mpc_over_h": 62.5,
+  "galaxies": 18960,
+  "encoding": "16-byte little-endian header: CWEB, uint16 version=2, uint16 stride=20, uint32 count, float32 box size; records: uint16 x,y,z (box/65535), uint16 r16 (16 Mpc/h /65535), int16 covariance xx,yy,zz,xy,xz,yz (4*r16^2/32767)",
+  "smoothing": "32 periodic neighbours; second moments around each tracer, 15% isotropic regularization, linear kernel scale 0.55. Not a physical gas model.",
+  "visualization": "Adaptive smoothing of galaxy tracers in a softly bounded slab; decorative colour and opacity. Not a gas or dark-matter density reconstruction, observed map, or COSMOS-Web field. Motion rotates a single snapshot.",
+  "credit": "Millennium simulation: Virgo Consortium, computed at the Max Planck Society computing centre in Garching. Public galaxy model and catalogue: Croton et al. (2006)."
+}

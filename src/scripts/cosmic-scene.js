@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { createCosmicField } from '../lib/cosmic-field.mjs';
+import { createCosmicField, decodeCosmicCatalogue } from '../lib/cosmic-field.mjs';
 
-export function mountCosmicScene() {
+export async function mountCosmicScene() {
   const host=document.querySelector('[data-cosmic-stage]');
   if(!host)return;
   const canvas=host.querySelector('canvas');
@@ -23,8 +23,22 @@ export function mountCosmicScene() {
     status.textContent='Illustrative cosmic web · static view';
   };
   try {
+    const request=new AbortController();
+    const onLoadingPageHide=(event)=>{if(!event.persisted){disposed=true;request.abort();}};
+    window.addEventListener('pagehide',onLoadingPageHide);
+    const timeout=setTimeout(()=>request.abort(),15000);
+    let catalogue;
+    try {
+      const response=await fetch(host.dataset.sourceUrl,{signal:request.signal});
+      if(!response.ok)throw new Error(`Cosmic catalogue request failed (${response.status})`);
+      catalogue=decodeCosmicCatalogue(await response.arrayBuffer());
+    } finally {
+      clearTimeout(timeout);
+      window.removeEventListener('pagehide',onLoadingPageHide);
+    }
+    if(disposed)return;
     renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,window.innerWidth<700?1.25:1.5));
     renderer.setClearColor(0x04050a,0);
     const scene=new THREE.Scene();
     const camera=new THREE.PerspectiveCamera(46,1,.1,180);
@@ -33,43 +47,65 @@ export function mountCosmicScene() {
     const cloud=new THREE.Group();
     scene.add(cloud);
     const density=window.innerWidth<700?.55:1;
-    const field=createCosmicField(7021,density);
+    const field=createCosmicField(catalogue,density);
     const geometry=new THREE.BufferGeometry();
     geometry.setAttribute('position',new THREE.BufferAttribute(field.positions,3));
-    geometry.setAttribute('color',new THREE.BufferAttribute(field.colors,3));
-    geometry.setAttribute('pointSize',new THREE.BufferAttribute(field.sizes,1));
+    geometry.setAttribute('variance',new THREE.BufferAttribute(field.variances,3));
+    geometry.setAttribute('covariance',new THREE.BufferAttribute(field.covariances,3));
+    geometry.setAttribute('opacity',new THREE.BufferAttribute(field.opacities,1));
+    geometry.setAttribute('tone',new THREE.BufferAttribute(field.tones,1));
     const material=new THREE.ShaderMaterial({
-      uniforms:{pixelRatio:{value:renderer.getPixelRatio()}},
+      uniforms:{pixelRatio:{value:renderer.getPixelRatio()},viewportHeight:{value:1}},
       vertexShader:`
-        attribute float pointSize;
-        attribute vec3 color;
-        varying vec3 pointColor;
+        attribute vec3 variance;
+        attribute vec3 covariance;
+        attribute float opacity;
+        attribute float tone;
+        varying float pointOpacity;
+        varying float pointTone;
+        varying float pixelSize;
+        varying vec3 inverseKernel;
         uniform float pixelRatio;
+        uniform float viewportHeight;
         void main(){
-          pointColor=color;
+          pointOpacity=opacity;
+          pointTone=tone;
           vec4 mv=modelViewMatrix*vec4(position,1.0);
-          gl_PointSize=clamp(pointSize*480.0*pixelRatio/max(1.0,-mv.z),pixelRatio,30.0*pixelRatio);
+          mat3 kernel=mat3(variance.x,covariance.x,covariance.y,
+            covariance.x,variance.y,covariance.z,covariance.y,covariance.z,variance.z);
+          mat3 rotation=mat3(modelViewMatrix);
+          mat3 projected=rotation*kernel*transpose(rotation);
+          float a=projected[0][0],b=projected[1][1],c=projected[0][1];
+          float largest=.5*(a+b+sqrt((a-b)*(a-b)+4.0*c*c));
+          float normalization=36.0*largest;
+          inverseKernel=vec3(b,a,-2.0*c)*normalization/max(a*b-c*c,1e-10);
+          pixelSize=clamp(6.0*sqrt(largest)*viewportHeight*projectionMatrix[1][1]/(2.0*max(1.0,-mv.z)),2.0*pixelRatio,110.0*pixelRatio);
+          gl_PointSize=pixelSize;
           gl_Position=projectionMatrix*mv;
         }`,
       fragmentShader:`
-        varying vec3 pointColor;
+        varying float pointOpacity;
+        varying float pointTone;
+        varying float pixelSize;
+        varying vec3 inverseKernel;
+        uniform float pixelRatio;
         void main(){
-          float r=length(gl_PointCoord-vec2(.5));
-          if(r>.5)discard;
-          float halo=exp(-r*r*32.0)*.4;
-          float core=exp(-r*r*72.0);
-          gl_FragColor=vec4(pointColor*(1.0+core*.8),halo+core*.85);
+          vec2 p=vec2(gl_PointCoord.x-.5,.5-gl_PointCoord.y);
+          float r2=dot(p,p);
+          if(r2>.25)discard;
+          float exponent=dot(vec3(p.x*p.x,p.y*p.y,p.x*p.y),inverseKernel);
+          float diffuse=max(0.0,exp(-.5*exponent)-.011109);
+          float core=exp(-r2*pixelSize*pixelSize/(2.2*pixelRatio*pixelRatio));
+          vec3 color=mix(vec3(.19,.40,.65),vec3(.70,.83,.95),pointTone);
+          float alpha=pointOpacity*(diffuse+core*1.4);
+          gl_FragColor=vec4(color,alpha);
         }`,
       transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
     });
     cloud.add(new THREE.Points(geometry,material));
-    const lineGeometry=new THREE.BufferGeometry();
-    lineGeometry.setAttribute('position',new THREE.BufferAttribute(field.linePositions,3));
-    const lineMaterial=new THREE.LineBasicMaterial({color:0x70baff,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending});
-    cloud.add(new THREE.LineSegments(lineGeometry,lineMaterial));
-    disposables.push(geometry,material,lineGeometry,lineMaterial);
-    cloud.rotation.z=-.24;
-    cloud.rotation.x=.13;
+    disposables.push(geometry,material);
+    cloud.rotation.z=-.18;
+    cloud.rotation.x=.10;
     controls=new OrbitControls(camera,canvas);
     controls.target.set(0,0,0);
     controls.enableZoom=false;
@@ -83,9 +119,10 @@ export function mountCosmicScene() {
     canvas.style.touchAction='pan-y';
     const draw=()=>{if(!disposed)renderer.render(scene,camera);};
     const tick=(time)=>{
-      if(lastTime!==null)angle+=Math.min((time-lastTime)/1000,.05)*.025;
+      if(lastTime!==null && time-lastTime<1000/30-1)return;
+      if(lastTime!==null)angle+=Math.min((time-lastTime)/1000,.1)*.045;
       lastTime=time;
-      cloud.rotation.y=angle;
+      cloud.rotation.y=.24*Math.sin(angle);
       draw();
     };
     const schedule=()=>{
@@ -104,6 +141,7 @@ export function mountCosmicScene() {
       // Spread the web across the background behind the title and profile.
       cloud.position.set(0,width<700?1:0,0);
       cloud.scale.setScalar(width<700?.85:1.3);
+      material.uniforms.viewportHeight.value=height*renderer.getPixelRatio();
       camera.updateProjectionMatrix();
       draw();
     };
@@ -152,6 +190,7 @@ export function mountCosmicScene() {
     toggle.disabled=false;reset.disabled=false;
     status.textContent=controls.enabled?'Illustrative cosmic web · drag to orbit':'Illustrative cosmic web';
   } catch(error) {
+    if(disposed)return;
     renderer?.setAnimationLoop(null);
     resizeObserver?.disconnect();intersectionObserver?.disconnect();
     controls?.dispose();

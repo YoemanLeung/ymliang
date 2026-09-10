@@ -209,7 +209,6 @@
   .talk-list h4 {font-size:1rem;line-height:1.6;margin:0;font-weight:600}
   .talk-list p {font-size:.85rem;color:var(--muted);margin-top:5px}
   .talk-list a {font-size:.83rem}
-  .talk-note {font-size:.8rem;color:var(--muted);margin-top:16px}
   .talk-contact {font-size:.9rem;color:var(--muted);margin-top:12px}
   .news-list {display:grid;gap:26px;margin-top:28px}
   .news-source {font-size:.74rem;letter-spacing:.07em;color:var(--accent)}
@@ -234,38 +233,44 @@
   .space .site-header {border-top:0;background:rgba(4,5,10,.91);backdrop-filter:blur(16px)}
   .space .wordmark {letter-spacing:.02em}
   .space .brand-mark {color:#b79cff}
-  .space-hero {position:relative;height:min(850px,calc(100svh - 77px));min-height:700px;overflow:hidden;background:radial-gradient(ellipse at 77% 40%,rgba(51,77,141,.18),transparent 62%),#04050a}
+  .space-hero {position:relative;height:min(850px,calc(100svh - 77px));min-height:740px;overflow:hidden;background:radial-gradient(ellipse at 55% 45%,rgba(51,77,141,.16),transparent 70%),#04050a}
   .cosmic-stage {position:absolute;inset:0}
   .cosmic-stage::before {content:'';position:absolute;inset:0;background:radial-gradient(1px 1px at 64% 26%,#bed7ff 90%,transparent),radial-gradient(2px 2px at 75% 64%,#92c8ff 50%,transparent),radial-gradient(1px 1px at 83% 35%,#ecbad1 90%,transparent),radial-gradient(1px 1px at 90% 74%,#ecbad1 90%,transparent),radial-gradient(ellipse at 75% 45%,rgba(55,91,166,.17),transparent 50%);pointer-events:none}
   #cosmic-canvas {width:100%;height:100%;display:block;position:relative;cursor:grab}
   #cosmic-canvas:active {cursor:grabbing}
-  .space-hero::after {content:'';position:absolute;inset:0;background:linear-gradient(90deg,#04050af0 0%,#04050a99 33%,transparent 65%),linear-gradient(0deg,#04050a,transparent 22%);pointer-events:none}
-  .space-hero-copy {position:relative;z-index:2;max-width:1210px;margin:auto;padding:118px 40px 110px;pointer-events:none}
+  .space-hero::after {content:'';position:absolute;inset:0;background:linear-gradient(90deg,#04050a70 0%,transparent 55%),linear-gradient(0deg,#04050a,transparent 20%);pointer-events:none}
+  .space-hero-layout {position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 340px;align-items:center;gap:clamp(40px,6vw,85px);max-width:1210px;height:100%;margin:auto;padding:50px 40px 110px;pointer-events:none}
+  .space-hero-copy {min-width:0;text-shadow:0 2px 18px #04050a}
   .space-hero-copy .eyebrow {letter-spacing:.21em;font-size:.84rem;color:#a7bbd6}
   .space-hero-copy [lang] {margin-left:12px;letter-spacing:.16em}
   .space-hero h1 {font-size:clamp(3.8rem,6.4vw,6.2rem);line-height:1.07;letter-spacing:-.045em;margin:24px 0 30px;color:#f3f5fc}
   .space-hero h1 em {font-weight:400;color:#b7dafa}
   .space-subtitle {font-size:1.09rem;line-height:1.9;color:#b8c6da;max-width:430px}
-  .space-role {font-size:.87rem;color:#94a4bc;margin-top:23px}
-  .space-hero-actions {display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .space-hero-actions {display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;text-shadow:none}
   .space-hero-actions a {pointer-events:auto;font-size:.84rem;backdrop-filter:blur(10px)}
+  .hero-profile {padding:24px;background:linear-gradient(135deg,#0b1426ed,#0b1426c9);border:1px solid #556c8a75;border-radius:8px;box-shadow:0 18px 65px #0005;pointer-events:auto}
+  .hero-profile .identity {position:static;display:block}
+  .hero-profile .portrait {width:230px;aspect-ratio:1;height:auto;margin:0 auto 22px}
+  .space .hero-profile .identity h2 {font-size:1.45rem;margin:0 0 12px;white-space:nowrap}
+  .space .hero-profile .identity h2 span {display:inline;font-size:1rem;letter-spacing:0;margin:0 0 0 8px}
+  .hero-profile .identity .email {margin-top:14px;font-size:.82rem}
+  .hero-profile .identity-links {margin:12px 0 0}
+  .hero-profile .identity .location {margin-top:10px}
   .space .button.primary {background:#accfea;color:#0a1523;border-color:#accfea}
   .space .button {border-radius:3px}
-  .scene-controls {position:absolute;right:38px;bottom:85px;display:flex;gap:9px;z-index:4}
+  .scene-controls {position:absolute;right:38px;bottom:32px;display:flex;gap:9px;z-index:4}
   .scene-controls button {border:1px solid #405675;color:#bacfe8;background:#091020cc;border-radius:3px;padding:8px 13px;font-size:.79rem}
   .scene-controls button:hover {background:#172a44}
   .scene-controls button:disabled {opacity:.45}
-  .scene-caption {position:absolute;right:38px;bottom:37px;z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-size:.72rem;color:#8fa1bb;pointer-events:none}
+  .scene-caption {position:absolute;left:50%;bottom:42px;transform:translateX(-50%);z-index:3;font-size:.72rem;color:#aabbd4;pointer-events:none}
   .scene-key {display:flex;align-items:center;gap:8px;font-size:.75rem}
-  .scene-key i {width:5px;height:5px;display:inline-block;border-radius:50%;margin-left:9px}
+  .scene-key i {width:6px;height:6px;display:inline-block;border-radius:50%;margin-left:9px}
   .gas-key {background:#579ff7}.galaxy-key {background:#f7d395}.quasar-key {background:#ff728b}
   .scroll-cue {position:absolute;bottom:45px;left:max(40px,calc((100vw - 1130px)/2));display:flex;align-items:center;gap:28px;z-index:4;font-size:.77rem;letter-spacing:.06em;color:#9eafc6;text-decoration:none}
   .scroll-cue span:last-child {font-size:1.3rem}
   .space-content {max-width:1080px;padding:0 40px 40px;margin:auto}
-  .space-about {display:grid;grid-template-columns:245px 1fr;gap:80px;padding:90px 0 70px;align-items:start}
-  .space-about .identity {position:static}
-  .space-about .portrait {width:185px;aspect-ratio:1;height:auto}
-  .space-about h2 {font-size:2.65rem;margin:15px 0 25px}
+  .space-about {display:grid;grid-template-columns:1fr 1.35fr;gap:65px;padding:70px 0;align-items:start}
+  .space-about h2 {font-size:2.4rem;margin:15px 0 25px}
   .space-about p:not(.eyebrow) {color:var(--muted);font-size:1rem}
   .space-about>div>a {display:inline-block;margin-top:25px;font-size:.9rem}
   .space .identity h2 {font-size:1.45rem;margin:20px 0 12px}
@@ -296,18 +301,25 @@
     .publication-year,.space .publication-year {grid-template-columns:1fr;gap:17px}
     .publication-year>h3 {font-size:1.6rem}
     .talk-list article {grid-template-columns:1fr;gap:7px}
-    .space-hero {height:800px;min-height:0;max-height:none}
-    .space-hero-copy {padding:62px 25px 0}
-    .space-hero h1 {font-size:clamp(3.5rem,12vw,5rem);margin-top:22px}
+    .space-hero {height:auto;min-height:0;max-height:none}
+    .space-hero-layout {grid-template-columns:1fr;gap:30px;padding:36px 25px 125px}
+    .space-hero h1 {font-size:clamp(3.2rem,11vw,4.8rem);margin:18px 0 22px}
     .space-subtitle {font-size:.96rem;max-width:340px}
-    .space-role {font-size:.78rem}
-    .space-hero::after {background:linear-gradient(180deg,#04050aa8 0%,#04050a30 64%,#04050a 100%)}
-    .scene-controls {right:24px;bottom:100px}
-    .scene-caption {left:24px;right:auto;bottom:38px;align-items:flex-start;max-width:85%}
-    .scroll-cue {left:24px;bottom:163px;font-size:.7rem;gap:12px}
+    .space-hero-actions {margin-top:22px}
+    .hero-profile {padding:20px;max-width:500px;width:100%}
+    .hero-profile .identity {display:grid;grid-template-columns:112px minmax(0,1fr);gap:0 18px}
+    .hero-profile .portrait {width:112px;grid-column:1;grid-row:1/4;margin:0;align-self:start}
+    .space .hero-profile .identity h2 {font-size:1.1rem;white-space:normal;grid-column:2;margin:0 0 7px}
+    .space .hero-profile .identity h2 span {display:block;font-size:.85rem;margin:4px 0 0}
+    .hero-profile .identity p {font-size:.76rem;line-height:1.5;grid-column:2}
+    .hero-profile .identity .email {grid-column:1/-1;margin-top:14px}
+    .hero-profile .identity-links {grid-column:1/-1;margin-top:9px}
+    .space-hero::after {background:linear-gradient(180deg,#04050a30 0%,transparent 65%,#04050a 100%)}
+    .scene-controls {right:24px;bottom:25px}
+    .scene-caption {left:24px;bottom:80px;transform:none;max-width:90%}
+    .scroll-cue {left:24px;bottom:28px;font-size:.7rem;gap:12px}
     .space-content {padding:0 25px 25px}
     .space-about {grid-template-columns:1fr;gap:30px;padding:55px 0}
-    .space-about .portrait {width:106px}
     .space-about h2 {font-size:2.2rem}
     .space .identity h2 {margin-top:0}
     .space .identity h2 span {font-size:.86rem}

@@ -40,8 +40,9 @@ test('Summary order follows wavelength groups regardless of input order', () => 
 });
 
 test('Public data is an aggregate-only schema with separate US funding attribution', () => {
-  assert.equal(publicSummary.facilities.length,15);
-  assert.equal(new Set(publicSummary.facilities.map(row=>row.id)).size,15);
+  assert.equal(publicSummary.facilities.length,14);
+  assert.equal(new Set(publicSummary.facilities.map(row=>row.id)).size,14);
+  assert.ok(!publicSummary.facilities.some(row=>row.facility==='Gemini North'));
   for(const row of publicSummary.facilities){
     assert.deepEqual(Object.keys(row).sort(),['collaboration','facility','id','pi']);
     for(const role of ['pi','collaboration']){
@@ -57,7 +58,7 @@ test('Public data is an aggregate-only schema with separate US funding attributi
   }
   assert.equal(publicSummary.support.administrativePi,'Martin Elvis');
   assert.equal(publicSummary.support.cycle,'Cycle 27');
-  assert.equal(publicSummary.support.administrativePiAffiliation,'Center for Astrophysics | Harvard & Smithsonian');
+  assert.equal(publicSummary.support.administrativePiAffiliation,'CfA');
   assert.equal(publicSummary.support.amount,61320);
   assert.equal(publicSummary.support.status,'approved');
   assert.match(publicSummary.support.scope,/including Co-I/);

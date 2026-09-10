@@ -14,25 +14,27 @@ import {localUrl} from '../lib/publications.mjs';
   <main id="main">
     <section class="space-hero" aria-labelledby="space-title">
       <SpaceScene />
+      <div class="space-hero-layout">
       <div class="space-hero-copy">
-        <p class="eyebrow">YONGMING LIANG <span lang="zh">梁永明</span></p>
+        <p class="eyebrow">EXTRAGALACTIC ASTRONOMY</p>
         <h1 id="space-title">Across the<br /><em>cosmic web.</em></h1>
         <p class="space-subtitle">Galaxies. Black holes. Intergalactic gas.<br />Exploring the connections that shape our Universe.</p>
-        <p class="space-role">ICRR Fellow · The University of Tokyo</p>
         <div class="space-hero-actions"><a class="button primary" href="#research">Discover the research</a><a class="button" href="#publications">Publications</a></div>
       </div>
-      <a class="scroll-cue" href="#about"><span>Meet the astronomer</span><span aria-hidden="true">↓</span></a>
+      <div class="hero-profile"><Identity compact portrait={{src: 'images/yongming-liang-alps.jpg', width: 886, height: 886}} /></div>
+      </div>
+      <a class="scroll-cue" href="#about"><span>More about me</span><span aria-hidden="true">↓</span></a>
     </section>
     <div class="space-content">
       <section class="space-about" id="about">
-        <Identity compact portrait={{src: 'images/yongming-liang-alps.jpg', width: 886, height: 886}} />
-        <div><p class="eyebrow">ABOUT ME</p><h2>Reading the Universe<br />through its connections.</h2><p>I study how galaxies and supermassive black holes evolve within the cosmic web, and how they interact with the gas around and between galaxies.</p><p>At ICRR, The University of Tokyo, I combine wide-field imaging, spectroscopy, and multiwavelength observations to explore these relationships in the distant Universe. I received my Ph.D. from SOKENDAI in 2022, working at NAOJ.</p><a href={localUrl('cv/')}>Curriculum vitae <span aria-hidden="true">↗</span></a></div>
+        <div><p class="eyebrow">ABOUT ME</p><h2>Reading the Universe<br />through its connections.</h2></div>
+        <div><p>I study how galaxies and supermassive black holes evolve within the cosmic web, and how they interact with the gas around and between galaxies.</p><p>At ICRR, The University of Tokyo, I combine wide-field imaging, spectroscopy, and multiwavelength observations to explore these relationships in the distant Universe. I received my Ph.D. from SOKENDAI in 2022, working at NAOJ.</p><a href={localUrl('cv/')}>Curriculum vitae <span aria-hidden="true">↗</span></a></div>
       </section>
       <Research />
+      <Career />
       <Publications />
       <Talks />
       <Proposals />
-      <Career />
       <News />
     </div>
   </main>

@@ -23,10 +23,36 @@ async function checkYear(panel, year) {
 try {
   browser = await chromium.launch({
     headless: true,
+    args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
     ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? {executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH} : {}),
   });
   const page = await browser.newPage({viewport: {width: 1280, height: 900}, reducedMotion: 'reduce'});
   page.on('pageerror', error => errors.push(error.message));
+  await page.goto(base+'/',{waitUntil:'networkidle'});
+  await page.locator('[data-cosmic-stage][data-state="ready"]').waitFor();
+  assert.equal(await page.locator('[data-cosmic-stage]').getAttribute('data-motion'),'paused');
+  const copy=await page.locator('.space-hero-copy').boundingBox();
+  const profile=await page.locator('.hero-profile').boundingBox();
+  const photo=await page.locator('.hero-profile .portrait').boundingBox();
+  assert.ok(profile.x>=copy.x+copy.width,'Profile belongs to the right of the title');
+  assert.ok(photo.y>=0 && photo.y+photo.height<=900,'Portrait is visible on the first screen');
+  assert.ok(Math.abs(photo.width-photo.height)<1 && photo.width>=220,'Hero preserves the full square portrait');
+  assert.equal(await page.locator('.portrait').count(),1,'Avoid a repeated identity block below the hero');
+  assert.ok(await page.evaluate(()=>Boolean(document.querySelector('#cv').compareDocumentPosition(document.querySelector('#publications')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+  const initialCanvas=await page.locator('#cosmic-canvas').screenshot();
+  await page.locator('#cosmic-canvas').focus();
+  await page.keyboard.press('ArrowRight');
+  assert.notDeepEqual(await page.locator('#cosmic-canvas').screenshot(),initialCanvas,'Keyboard orbit changes the rendered web');
+  await page.keyboard.press('Home');
+  assert.deepEqual(await page.locator('#cosmic-canvas').screenshot(),initialCanvas,'Home restores the paused initial web');
+  await page.locator('#motion-toggle').click();
+  assert.equal(await page.locator('[data-cosmic-stage]').getAttribute('data-motion'),'playing');
+  await page.locator('#motion-toggle').click();
+  await page.locator('#scene-reset').click();
+  if(process.env.QA_OUTPUT_DIR){
+    await mkdir(process.env.QA_OUTPUT_DIR,{recursive:true});
+    await page.screenshot({path:join(process.env.QA_OUTPUT_DIR,'hero-desktop.png')});
+  }
   await page.goto(base + '/#talks', {waitUntil: 'networkidle'});
   const talks = page.locator('year-browser[data-prefix="talk-year-"]');
   const papers = page.locator('year-browser[data-prefix="year-"]');
@@ -41,7 +67,7 @@ try {
   assert.match(await proposals.locator('[data-facility="chandra"]').innerText(),/340 ks\s+120 ks/);
   assert.match(await proposals.locator('[data-facility="roman"]').innerText(),/1 Analysis program/);
   assert.match(await proposals.locator('[data-facility="noema"]').innerText(),/10 h/);
-  assert.doesNotMatch(await proposals.innerText(),/Unquantified|unquantified|Observed/);
+  assert.doesNotMatch(await proposals.innerText(),/Unquantified|unquantified|Observed|Grade C|Gemini North/);
   if(process.env.QA_OUTPUT_DIR){
     await mkdir(process.env.QA_OUTPUT_DIR,{recursive:true});
     await proposals.screenshot({path:join(process.env.QA_OUTPUT_DIR,'summary-desktop.png')});
@@ -78,6 +104,11 @@ try {
 
   // Direct links, standalone route, and narrow screen use the same working controls.
   await page.setViewportSize({width: 390, height: 844});
+  await page.goto(base+'/',{waitUntil:'networkidle'});
+  const mobilePhoto=await page.locator('.hero-profile .portrait').boundingBox();
+  assert.ok(mobilePhoto.y+mobilePhoto.height<844,'Mobile portrait stays on the first screen');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+  if(process.env.QA_OUTPUT_DIR) await page.screenshot({path:join(process.env.QA_OUTPUT_DIR,'hero-mobile.png'),fullPage:false});
   await page.goto(base + '/talks/#talk-year-2020', {waitUntil: 'networkidle'});
   await checkYear(talks, '2020');
   await talks.locator('[data-newer]').click();
@@ -112,7 +143,7 @@ try {
   await page.emulateMedia({media:'print'});
   assert.ok((await portrait.boundingBox()).width>=125,'Printed CV portrait is enlarged');
   assert.deepEqual(errors, [], 'Browser initialization and navigation must not throw');
-  console.log('Browser checks passed: 15 telescope totals, no detailed proposals, legacy redirect, enlarged CV portrait, funding placement, 58 presentations, independent year controls, deep links, and mobile layout.');
+  console.log('Browser checks passed: hero portrait and WebGL controls, career before publications, 14 telescope totals, concise public copy, CV, 58 presentations, year controls, and mobile layout.');
 } finally {
   await browser?.close();
   await server?.close();

@@ -10,7 +10,7 @@ const {id, prefix, label, singular, plural, years, summary} = Astro.props;
   <div class="publication-scroll" id={id+'-viewport'} role="region" aria-label={label+' by year'} tabindex="0">
     <slot />
   </div>
-  <div class="publication-browser-footer"><p data-status role="status" aria-live="polite" aria-atomic="true">{summary}</p><span>Scroll within the list</span></div>
+  <div class="publication-browser-footer"><p data-status role="status" aria-live="polite" aria-atomic="true">{summary}</p></div>
 </year-browser>
 <script>
   import '../scripts/year-browser.js';

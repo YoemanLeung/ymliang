@@ -23,8 +23,8 @@ export function mountCosmicScene() {
     status.textContent='Illustrative cosmic web · static view';
   };
   try {
-    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:false,powerPreference:'low-power'});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.6));
+    renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
     renderer.setClearColor(0x04050a,0);
     const scene=new THREE.Scene();
     const camera=new THREE.PerspectiveCamera(46,1,.1,180);
@@ -48,7 +48,7 @@ export function mountCosmicScene() {
         void main(){
           pointColor=color;
           vec4 mv=modelViewMatrix*vec4(position,1.0);
-          gl_PointSize=clamp(pointSize*440.0*pixelRatio/max(1.0,-mv.z),1.0,38.0*pixelRatio);
+          gl_PointSize=clamp(pointSize*480.0*pixelRatio/max(1.0,-mv.z),pixelRatio,30.0*pixelRatio);
           gl_Position=projectionMatrix*mv;
         }`,
       fragmentShader:`
@@ -56,16 +56,16 @@ export function mountCosmicScene() {
         void main(){
           float r=length(gl_PointCoord-vec2(.5));
           if(r>.5)discard;
-          float halo=exp(-r*r*18.0);
-          float core=exp(-r*r*85.0);
-          gl_FragColor=vec4(pointColor*(.8+core),halo*.7);
+          float halo=exp(-r*r*32.0)*.4;
+          float core=exp(-r*r*72.0);
+          gl_FragColor=vec4(pointColor*(1.0+core*.8),halo+core*.85);
         }`,
       transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
     });
     cloud.add(new THREE.Points(geometry,material));
     const lineGeometry=new THREE.BufferGeometry();
     lineGeometry.setAttribute('position',new THREE.BufferAttribute(field.linePositions,3));
-    const lineMaterial=new THREE.LineBasicMaterial({color:0x579ed9,transparent:true,opacity:.10,depthWrite:false,blending:THREE.AdditiveBlending});
+    const lineMaterial=new THREE.LineBasicMaterial({color:0x70baff,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending});
     cloud.add(new THREE.LineSegments(lineGeometry,lineMaterial));
     disposables.push(geometry,material,lineGeometry,lineMaterial);
     cloud.rotation.z=-.24;
@@ -101,9 +101,9 @@ export function mountCosmicScene() {
       const {width,height}=host.getBoundingClientRect();
       renderer.setSize(width,height,false);
       camera.aspect=width/height;
-      // Offset the 3D structure toward the open right half of the hero.
-      cloud.position.x=width<700?2:7;
-      cloud.position.y=width<700?3:0;
+      // Spread the web across the background behind the title and profile.
+      cloud.position.set(0,width<700?1:0,0);
+      cloud.scale.setScalar(width<700?.85:1.3);
       camera.updateProjectionMatrix();
       draw();
     };

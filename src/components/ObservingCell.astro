@@ -4,7 +4,6 @@ const {cell} = Astro.props;
 ---
 {cell.measurements.map(time => <span class="observing-value">
   <strong>{summaryTimeLabel(time)}</strong>
-  {time.basis === 'requested' && <small>Grade C requests</small>}
 </span>)}
 {!cell.measurements.length && cell.unquantified > 0 && <span class="observing-value"><strong>{cell.unquantified} {cell.unquantified === 1 ? 'program' : 'programs'}</strong></span>}
 {cell.analysis > 0 && <span class="observing-value"><strong>{cell.analysis} Analysis {cell.analysis === 1 ? 'program' : 'programs'}</strong></span>}

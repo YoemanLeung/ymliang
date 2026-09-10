@@ -4,10 +4,10 @@ import ObservingCell from './ObservingCell.astro';
 const {document = false} = Astro.props;
 ---
 <section class="content-section proposals-section" id="proposals" aria-labelledby="proposals-heading">
-  <div class="section-heading">{!document && <span class="eyebrow">04 / PROPOSALS</span>}<h2 id="proposals-heading">Observing time</h2></div>
+  <div class="section-heading">{!document && <span class="eyebrow">05 / PROPOSALS</span>}<h2 id="proposals-heading">Observing time</h2></div>
   <p class="proposal-guide">Telescope time for PI-led projects and collaborations · {summary.period.start}–{summary.period.end}</p>
   <div class="observing-table-wrap">
-    <table class="observing-table" aria-describedby="observing-notes">
+    <table class="observing-table">
       <caption class="sr-only">Recorded telescope time by facility and role</caption>
       <thead><tr><th scope="col">Telescope</th><th scope="col">PI</th><th scope="col">Co-I / collaborator</th></tr></thead>
       <tbody>{summary.facilities.map(row => <tr data-facility={row.id}>
@@ -17,5 +17,4 @@ const {document = false} = Astro.props;
       </tr>)}</tbody>
     </table>
   </div>
-  <p class="observing-notes" id="observing-notes">X-ray → Optical / infrared → Submillimeter / millimeter → Radio · Rounded totals</p>
 </section>

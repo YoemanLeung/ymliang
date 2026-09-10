@@ -110,20 +110,6 @@
       }
     },
     {
-      "id": "gemini-north",
-      "facility": "Gemini North",
-      "pi": {
-        "measurements": [],
-        "unquantified": 1,
-        "analysis": 0
-      },
-      "collaboration": {
-        "measurements": [],
-        "unquantified": 0,
-        "analysis": 0
-      }
-    },
-    {
       "id": "blanco-4-m",
       "facility": "Blanco 4-m",
       "pi": {
@@ -331,7 +317,7 @@
     "currency": "USD",
     "status": "approved",
     "administrativePi": "Martin Elvis",
-    "administrativePiAffiliation": "Center for Astrophysics | Harvard & Smithsonian",
+    "administrativePiAffiliation": "CfA",
     "scope": "Total U.S. observing grant, including Co-I grants"
   }
 }

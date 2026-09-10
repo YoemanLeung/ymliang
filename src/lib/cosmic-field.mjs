@@ -33,21 +33,21 @@ export function createCosmicField(seed = 7021, density = 1) {
   edges.forEach(([ia,ib],index)=>{
     const a=nodes[ia],b=nodes[ib],phase=index*2.31;
     for(let j=0;j<Math.floor(310*density);j++){
-      const t=random(),p=curve(a,b,t,phase),spread=.15+Math.sin(t*Math.PI)*.25;
-      add(p[0]+gaussian()*spread,p[1]+gaussian()*spread,p[2]+gaussian()*spread,cold,.026+random()*.055);
+      const t=random(),p=curve(a,b,t,phase),spread=.07+Math.sin(t*Math.PI)*.13;
+      add(p[0]+gaussian()*spread,p[1]+gaussian()*spread,p[2]+gaussian()*spread,cold,.045+random()*.065);
     }
     for(let j=0;j<35;j++)linePositions.push(...curve(a,b,j/35,phase),...curve(a,b,(j+1)/35,phase));
   });
   nodes.forEach((n,index)=>{
     const quasar=[3,6,9].includes(index);
     for(let j=0;j<Math.floor((quasar?620:330)*density);j++){
-      const s=.12+random()*.75,color=quasar && j%5===0 ? hot : (j%4===0?warm:cold);
+      const s=.08+random()*.48,color=quasar && j%5===0 ? hot : (j%4===0?warm:cold);
       add(n[0]+gaussian()*s,n[1]+gaussian()*s,n[2]+gaussian()*s,color,.03+random()*.075);
     }
-    add(...n,quasar?hot:warm,quasar?.6:.35);
+    add(...n,quasar?hot:warm,quasar?1.1:.65);
   });
-  for(let i=0;i<Math.floor(2100*density);i++){
-    add((random()-.5)*85,(random()-.5)*65,(random()-.5)*65,[.55,.68,.85],.02+random()*.035);
+  for(let i=0;i<Math.floor(700*density);i++){
+    add((random()-.5)*85,(random()-.5)*65,(random()-.5)*65,[.3,.4,.55],.02+random()*.035);
   }
   return {positions:new Float32Array(positions),colors:new Float32Array(colors),sizes:new Float32Array(sizes),linePositions:new Float32Array(linePositions)};
 }

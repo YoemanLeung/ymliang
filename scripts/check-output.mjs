@@ -19,6 +19,7 @@ for(const route of routes){
   const html=await readFile(resolve(root,route),'utf8');
   assert.ok(!html.includes('/Users/'),'private path in output');
   assert.ok(!/Academic view|Explore in 3D|academic-shell|version-switch/.test(html),'retired conventional view in output');
+  assert.ok(!/Dates are shown to the precision|some earlier entries|Newest first, across all author roles|Scroll within the list|Rounded totals|Grade C requests|Gemini North/.test(html),'editorial notes or retired telescope in output');
   const expectedPapers=topicsByRoute.has(route)?topicReferences(topicsByRoute.get(route),data.papers):['index.html','cv/index.html','publications/index.html'].includes(route)?papers:[];
   const ids=[...html.matchAll(/\sdata-bibcode="([^"]+)"/g)].map(m=>m[1].replaceAll('&amp;','&'));
   assert.deepEqual(ids,expectedPapers.map(paper=>paper.bibcode),route+' bibliography order');
@@ -31,7 +32,7 @@ for(const route of routes){
   if(hasSummary){
     for(const row of summary.facilities)for(const role of ['pi','collaboration'])for(const time of row[role].measurements)assert.ok(html.includes(summaryTimeLabel(time)),'missing telescope time');
     assert.ok(html.includes('US$61,320 approved') && html.includes('U.S. administrative PI: Martin Elvis'));
-    assert.ok(html.includes('Grade C requests') && html.includes('Chandra Cycle 27'));
+    assert.ok(html.includes('Chandra Cycle 27') && html.includes('Martin Elvis (CfA)'));
     assert.ok(!/Unquantified|unquantified time|>Observed<|Funding policy/.test(html));
     assert.ok(html.includes('1 Analysis program'));
     assert.ok(html.includes('Journal referee:'));
@@ -60,6 +61,10 @@ for(const route of routes){
     assert.match(html,/window.location.replace\(destination\)/);
   } else if(route==='cv/index.html'||topicsByRoute.has(route))assert.equal(scriptBlocks.length,0,'CV and research pages must contain no client scripts');
   assert.equal(html.includes('id="cosmic-canvas"'),route==='index.html','3D scene belongs only to the homepage');
+  if(route==='index.html'){
+    assert.ok(html.indexOf('class="hero-profile"')<html.indexOf('id="about"'),'identity belongs in the hero');
+    assert.ok(html.indexOf('id="cv"')<html.indexOf('id="publications"'),'career must precede publications');
+  }
   if(topicsByRoute.has(route)){
     const topic=topicsByRoute.get(route);
     for(const section of topic.sections)for(const id of section.citations){

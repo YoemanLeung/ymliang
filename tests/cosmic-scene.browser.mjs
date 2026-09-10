@@ -29,7 +29,9 @@ export async function checkCosmicScene(browser, base) {
   assert.ok((frames.length-1)/duration*1000<34,'Cap rendering at roughly 30 fps');
   assert.ok(frames.every(frame=>frame.mode===0 && frame.count===initial.count));
   await page.locator('#talks').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(200);
+  // IntersectionObserver delivery can lag on a busy software renderer.
+  // Synchronize with the actual scheduler, then verify no further GPU draws.
+  await page.locator('[data-cosmic-stage][data-rendering="idle"]').waitFor({state:'attached'});
   const offscreenCount=await page.evaluate(()=>window.cosmicDraws.length);
   await page.waitForTimeout(200);
   assert.equal(await page.evaluate(()=>window.cosmicDraws.length),offscreenCount,'Do not animate offscreen');

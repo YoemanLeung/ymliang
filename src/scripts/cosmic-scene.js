@@ -128,7 +128,9 @@ export async function mountCosmicScene() {
     const schedule=()=>{
       if(disposed)return;
       lastTime=null;
-      renderer.setAnimationLoop(playing && intersecting && !document.hidden ? tick : null);
+      const active=playing && intersecting && !document.hidden;
+      renderer.setAnimationLoop(active ? tick : null);
+      host.dataset.rendering=active?'running':'idle';
       toggle.textContent=playing?'Pause motion':'Play motion';
       toggle.setAttribute('aria-pressed',String(!playing));
       host.dataset.motion=playing?'playing':'paused';
